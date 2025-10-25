@@ -14,6 +14,9 @@ AllCops:
     - 'vendor/**/*'
     - 'bin/**/*'
     - 'Gemfile'
+    - 'config/**/*'
+    - 'config.ru'
+    - 'config/initializers/**/*'
 
 plugins:
   - rubocop-rails
@@ -22,6 +25,8 @@ plugins:
 # Readability: 120 chars is reasonable for modern displays
 Layout/LineLength:
   Max: 120
+  Exclude:
+    - 'config/**/*'
 
 # Frozen string literals add overhead without much benefit in Rails 3+
 Style/FrozenStringLiteralComment:

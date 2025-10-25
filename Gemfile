@@ -75,3 +75,5 @@ group :development, :test do
   gem "dotenv-rails"
   gem "bundler-audit", require: false
 end
+
+gem "devise", "~> 4.9"
