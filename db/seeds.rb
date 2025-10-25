@@ -20,20 +20,70 @@ User.find_or_create_by!(email: 'user@islam4kids.org') do |user|
   user.is_admin = false
 end
 
-# Create draft blog
-Blog.find_or_create_by!(title: 'Draft Blog', content: 'This is a draft blog post.', status: 'draft')
+# Create sample blogs with Faker
+if Blog.none?
+  Rails.logger.debug 'Creating sample blogs...'
 
-# Create published blog
-Blog.find_or_create_by!(title: 'Published Blog', content: 'This is a published blog post.', status: 'published')
+  # Create published blogs
+  10.times do
+    Blog.create!(
+      title: Faker::Book.title,
+      content: Faker::Lorem.paragraph(sentence_count: 10),
+      status: 'published',
+      created_at: Faker::Time.between(from: 30.days.ago, to: Time.current)
+    )
+  end
 
-# Create archived blog
-Blog.find_or_create_by!(title: 'Archived Blog', content: 'This is an archived blog post.', status: 'archived')
+  # Create draft blogs
+  3.times do
+    Blog.create!(
+      title: Faker::Book.title,
+      content: Faker::Lorem.paragraph(sentence_count: 8),
+      status: 'draft'
+    )
+  end
 
-# Create draft story
-Story.find_or_create_by!(title: 'Draft Story', content: 'This is a draft story.', status: 'draft')
+  # Create archived blogs
+  2.times do
+    Blog.create!(
+      title: Faker::Book.title,
+      content: Faker::Lorem.paragraph(sentence_count: 8),
+      status: 'archived',
+      created_at: Faker::Time.between(from: 60.days.ago, to: 30.days.ago)
+    )
+  end
+end
 
-# Create published story
-Story.find_or_create_by!(title: 'Published Story', content: 'This is a published story.', status: 'published')
+# Create sample stories with Faker
+if Story.none?
+  Rails.logger.debug 'Creating sample stories...'
 
-# Create archived story
-Story.find_or_create_by!(title: 'Archived Story', content: 'This is an archived story.', status: 'archived')
+  # Create published stories
+  10.times do
+    Story.create!(
+      title: Faker::Book.title,
+      content: Faker::Lorem.paragraph(sentence_count: 12),
+      status: 'published',
+      created_at: Faker::Time.between(from: 30.days.ago, to: Time.current)
+    )
+  end
+
+  # Create draft stories
+  3.times do
+    Story.create!(
+      title: Faker::Book.title,
+      content: Faker::Lorem.paragraph(sentence_count: 10),
+      status: 'draft'
+    )
+  end
+
+  # Create archived stories
+  2.times do
+    Story.create!(
+      title: Faker::Book.title,
+      content: Faker::Lorem.paragraph(sentence_count: 10),
+      status: 'archived',
+      created_at: Faker::Time.between(from: 60.days.ago, to: 30.days.ago)
+    )
+  end
+end
