@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(echo $ANTHROPIC_API_KEY)",
-      "Bash(env)"
+      "Bash(env)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

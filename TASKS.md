@@ -31,20 +31,20 @@ Work through these in order. Implement each task, then ask Claude to review.
 ## Phase 1C: Homepage & Navigation
 
 - [x] 21. Build `HomeController` and homepage view
-- [ ] 21a. Setup Tailwind CSS (verify installation and configuration)
-- [ ] 22. Create navigation layout (authenticated vs public)
-- [ ] 23. Add static `PagesController` (about, contact, resources)
+- [x] 21a. Setup Tailwind CSS (verify installation and configuration)
+- [x] 22. Create navigation layout (authenticated vs public)
+- [x] 23. Add static `PagesController` (about, contact, resources)
 - [x] 24. Link to prayer PDF on resources page (skip for now, there are many PDFs)
 
 ## Phase 1G: UI & Styling
 
-- [ ] 25. Style homepage with featured content
-- [ ] 26. Style admin interface (blogs/stories CRUD views)
-- [ ] 27. Style public blogs index and show pages
-- [ ] 28. Style public stories index and show pages
-- [ ] 29. Add responsive navigation with authentication states
-- [ ] 30. Style forms (new/edit) for admin
-- [ ] 31. Add basic layout improvements (header, footer, typography)
+- [x] 25. Style homepage with featured content
+- [x] 26. Style admin interface (blogs/stories CRUD views)
+- [x] 27. Style public blogs index and show pages
+- [x] 28. Style public stories index and show pages
+- [x] 29. Add responsive navigation with authentication states
+- [x] 30. Style forms (new/edit) for admin
+- [x] 31. Add basic layout improvements (header, footer, typography)
 
 ## Phase 1D: Storage & AWS
 

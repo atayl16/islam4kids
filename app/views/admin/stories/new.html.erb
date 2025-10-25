@@ -1,5 +1,9 @@
-<h1>New Story</h1>
+<div class="max-w-3xl mx-auto py-8 px-4">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">New Story</h1>
 
-<%= render 'form', story: @story %>
+  <%= render 'form', story: @story %>
 
-<%= link_to 'Back', admin_stories_path %>
+  <div class="mt-4">
+    <%= link_to '← Back to Stories', admin_stories_path, class: 'text-gray-600 hover:text-gray-800 font-medium' %>
+  </div>
+</div>

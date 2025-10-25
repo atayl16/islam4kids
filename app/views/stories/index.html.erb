@@ -1,15 +1,72 @@
-<div class="max-w-4xl mx-auto">
-  <h1 class="text-4xl font-bold text-gray-800 mb-8">Stories</h1>
+<div class="max-w-6xl mx-auto">
+  <!-- Header Section with Islamic Design -->
+  <div class="text-center mb-12">
+    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-violet-500 to-violet-600 rounded-full mb-4 shadow-lg">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+      </svg>
+    </div>
+    <h1 class="text-5xl font-bold text-slate-800 mb-3">Inspiring Stories</h1>
+    <p class="text-xl text-slate-600">Tales that teach, inspire, and guide young hearts</p>
+    <div class="mt-4 h-1 w-32 bg-gradient-to-r from-violet-500 to-amber-400 rounded-full mx-auto"></div>
+  </div>
 
-  <div class="space-y-6">
+  <!-- Story Cards Grid -->
+  <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
     <% @stories.each do |story| %>
-      <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-3">
-          <%= link_to story.title, story_path(story), class: "text-green-600 hover:text-green-700 hover:underline" %>
-        </h2>
-        <p class="text-gray-600 mb-4 line-clamp-3"><%= truncate(story.content, length: 150) %></p>
-        <p class="text-sm text-gray-500">Published: <%= story.created_at.strftime('%B %d, %Y') %></p>
-      </div>
+      <%= link_to story_path(story), class: "group block" do %>
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-violet-400 transform hover:-translate-y-2">
+          <!-- Card Header with Gradient -->
+          <div class="h-3 bg-gradient-to-r from-violet-500 via-violet-400 to-amber-400"></div>
+
+          <!-- Card Content -->
+          <div class="p-8">
+            <!-- Icon -->
+            <div class="inline-flex items-center justify-center w-12 h-12 bg-violet-100 rounded-xl mb-4 group-hover:bg-violet-200 transition-colors">
+              <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-2xl font-bold text-slate-800 mb-4 group-hover:text-violet-600 transition-colors leading-tight">
+              <%= story.title %>
+            </h2>
+
+            <!-- Excerpt -->
+            <p class="text-slate-600 mb-6 line-clamp-3 leading-relaxed">
+              <%= truncate(story.content, length: 180, separator: ' ') %>
+            </p>
+
+            <!-- Footer -->
+            <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+              <div class="flex items-center text-sm text-slate-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <%= story.created_at.strftime('%B %d, %Y') %>
+              </div>
+              <div class="flex items-center text-violet-600 font-semibold group-hover:translate-x-2 transition-transform">
+                Read Story
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
+
+  <!-- Empty State -->
+  <% if @stories.empty? %>
+    <div class="text-center py-16 bg-white rounded-2xl shadow-lg">
+      <svg class="w-24 h-24 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+      </svg>
+      <h3 class="text-2xl font-bold text-slate-700 mb-2">No stories yet</h3>
+      <p class="text-slate-500">Check back soon for inspiring tales!</p>
+    </div>
+  <% end %>
 </div>

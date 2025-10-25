@@ -1,6 +1,11 @@
-<h1>Edit Blog</h1>
+<div class="max-w-3xl mx-auto py-8 px-4">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Edit Blog</h1>
 
-<%= render 'form', blog: @blog %>
+  <%= render 'form', blog: @blog %>
 
-<%= link_to 'Show', @blog %> |
-<%= link_to 'Back', admin_blogs_path %>
+  <div class="mt-4 flex space-x-4">
+    <%= link_to 'Show', admin_blog_path(@blog), class: 'text-blue-600 hover:text-blue-800 font-medium' %>
+    <span class="text-gray-400">|</span>
+    <%= link_to '← Back to Blogs', admin_blogs_path, class: 'text-gray-600 hover:text-gray-800 font-medium' %>
+  </div>
+</div>

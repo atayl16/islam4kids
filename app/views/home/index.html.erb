@@ -1,16 +1,130 @@
-<div class="text-center py-12">
-  <h1 class="text-5xl font-bold text-gray-800 mb-6">Welcome to Islam4Kids</h1>
-  <p class="text-xl text-gray-600 mb-8">Inspiring Islamic education for children</p>
-  
-  <div class="grid md:grid-cols-2 gap-6 mt-12">
-    <%= link_to blogs_path, class: "block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow" do %>
-      <h2 class="text-2xl font-semibold text-gray-800 mb-2">📝 Blogs</h2>
-      <p class="text-gray-600">Educational content and articles for kids</p>
+<div class="max-w-7xl mx-auto">
+  <!-- Hero Section -->
+  <div class="text-center py-16 px-4">
+    <!-- Logo/Icon -->
+    <div class="flex justify-center mb-8">
+      <div class="relative">
+        <div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-violet-500 rounded-full flex items-center justify-center shadow-2xl">
+          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <div class="absolute -top-2 -right-2 w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center shadow-lg">
+          <svg class="w-5 h-5 text-amber-900" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Heading -->
+    <h1 class="text-6xl md:text-7xl font-bold mb-6">
+      <span class="bg-gradient-to-r from-emerald-600 via-emerald-500 to-violet-600 bg-clip-text text-transparent">
+        Islam4Kids
+      </span>
+    </h1>
+    <p class="text-2xl md:text-3xl text-slate-700 font-medium mb-4">
+      Inspiring Islamic Education for Children
+    </p>
+    <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+      A safe, engaging platform for young Muslims to learn, grow, and discover the beauty of Islam through stories and educational content.
+    </p>
+
+    <!-- Decorative Divider -->
+    <div class="mt-8 mb-12 flex items-center justify-center">
+      <div class="h-1 w-20 bg-gradient-to-r from-transparent to-emerald-400 rounded-full"></div>
+      <div class="mx-4 w-2 h-2 bg-amber-400 rounded-full"></div>
+      <div class="h-1 w-20 bg-gradient-to-l from-transparent to-violet-400 rounded-full"></div>
+    </div>
+  </div>
+
+  <!-- Content Cards Grid -->
+  <div class="grid md:grid-cols-2 gap-8 px-4 pb-16">
+    <!-- Blogs Card -->
+    <%= link_to blogs_path, class: "group block" do %>
+      <div class="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-3 border-2 border-transparent hover:border-emerald-400">
+        <!-- Gradient Top Bar -->
+        <div class="h-3 bg-gradient-to-r from-emerald-500 via-emerald-400 to-amber-400"></div>
+
+        <!-- Card Content -->
+        <div class="p-10">
+          <!-- Icon -->
+          <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+
+          <!-- Title -->
+          <h2 class="text-3xl font-bold text-slate-800 mb-4 group-hover:text-emerald-600 transition-colors">
+            Educational Blogs
+          </h2>
+
+          <!-- Description -->
+          <p class="text-lg text-slate-600 leading-relaxed mb-6">
+            Discover articles, lessons, and guidance on Islamic teachings, values, and practices designed especially for young minds.
+          </p>
+
+          <!-- CTA -->
+          <div class="flex items-center text-emerald-600 font-semibold group-hover:translate-x-2 transition-transform">
+            <span>Explore Blogs</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Decorative Circle -->
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-emerald-100 rounded-full opacity-20"></div>
+      </div>
     <% end %>
-    
-    <%= link_to stories_path, class: "block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow" do %>
-      <h2 class="text-2xl font-semibold text-gray-800 mb-2">📚 Stories</h2>
-      <p class="text-gray-600">Inspiring stories and tales</p>
+
+    <!-- Stories Card -->
+    <%= link_to stories_path, class: "group block" do %>
+      <div class="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-3 border-2 border-transparent hover:border-violet-400">
+        <!-- Gradient Top Bar -->
+        <div class="h-3 bg-gradient-to-r from-violet-500 via-violet-400 to-amber-400"></div>
+
+        <!-- Card Content -->
+        <div class="p-10">
+          <!-- Icon -->
+          <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-violet-500 to-violet-600 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+
+          <!-- Title -->
+          <h2 class="text-3xl font-bold text-slate-800 mb-4 group-hover:text-violet-600 transition-colors">
+            Inspiring Stories
+          </h2>
+
+          <!-- Description -->
+          <p class="text-lg text-slate-600 leading-relaxed mb-6">
+            Engage with beautiful stories from Islamic history, prophets, and companions that inspire faith, character, and wisdom.
+          </p>
+
+          <!-- CTA -->
+          <div class="flex items-center text-violet-600 font-semibold group-hover:translate-x-2 transition-transform">
+            <span>Read Stories</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Decorative Circle -->
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-violet-100 rounded-full opacity-20"></div>
+      </div>
     <% end %>
+  </div>
+
+  <!-- Footer Message -->
+  <div class="text-center pb-16 px-4">
+    <div class="inline-block bg-gradient-to-r from-emerald-50 to-violet-50 rounded-2xl px-8 py-6 shadow-lg">
+      <p class="text-lg text-slate-700 font-medium">
+        <span class="text-2xl">✨</span> Building a foundation of faith, one story at a time <span class="text-2xl">✨</span>
+      </p>
+    </div>
   </div>
 </div>
