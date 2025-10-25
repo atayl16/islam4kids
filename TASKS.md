@@ -11,9 +11,9 @@ Work through these in order. Implement each task, then ask Claude to review.
 - [x] 5. Create seed admin user in `db/seeds.rb`
 - [x] 6. Test sign up/sign in flows manually
 - [x] 7. Create `app/models/concerns/publishable.rb` concern
-- [ ] 8. Generate Blog model with Publishable concern
-- [ ] 9. Generate Story model with Publishable concern
-- [ ] 10. Write model specs (User, Blog, Story validations/scopes)
+- [x] 8. Generate Blog model with Publishable concern
+- [x] 9. Generate Story model with Publishable concern
+- [x] 10. Write model specs (User, Blog, Story validations/scopes)
 
 ## Phase 1B: Controllers & Views
 

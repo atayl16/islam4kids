@@ -1,0 +1,15 @@
+<div class="admin-stories-show">
+  <h1><%= @story.title %></h1>
+  
+  <p><strong>Status:</strong> <%= @story.status %></p>
+  <p><strong>Created:</strong> <%= @story.created_at.strftime('%B %d, %Y') %></p>
+  
+  <div class="content">
+    <%= simple_format(@story.content) %>
+  </div>
+  
+  <div class="actions">
+    <%= link_to 'Edit', edit_admin_story_path(@story), class: 'btn btn-primary' %>
+    <%= link_to 'Back to Stories', admin_stories_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

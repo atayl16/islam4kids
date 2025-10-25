@@ -2,7 +2,12 @@ PreCommit:
   RuboCop:
     enabled: true
     required_executable: 'rubocop'
-    command: ['bundle', 'exec', 'rubocop']
+    command: ['bundle', 'exec', 'rubocop', '--autocorrect-all', '--fail-level', 'error']
+    on_warn: pass  # Don't fail on warnings, only errors
+    exclude:
+      - 'config/**/*'
+      - 'db/schema.rb'
+      - 'db/migrate/**/*'
   
   RSpec:
     enabled: false

@@ -1,0 +1,27 @@
+<div class="admin-stories-index">
+  <h1>Stories</h1>
+  <%= link_to 'New Story', new_admin_story_path, class: 'btn btn-primary' %>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stories.each do |story| %>
+        <tr>
+          <td><%= story.title %></td>
+          <td><%= story.status %></td>
+          <td><%= story.created_at.strftime('%B %d, %Y') %></td>
+          <td><%= link_to 'Show', admin_story_path(story) %></td>
+          <td><%= link_to 'Edit', edit_admin_story_path(story) %></td>
+          <td><%= link_to 'Delete', admin_story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

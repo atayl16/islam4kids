@@ -3,5 +3,9 @@ FactoryBot.define do
     email { "user#{rand(1000)}@example.com" }
     password { 'password123' }
     is_admin { false }
+
+    trait :admin do
+      is_admin { true }
+    end
   end
 end
