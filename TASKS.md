@@ -30,38 +30,49 @@ Work through these in order. Implement each task, then ask Claude to review.
 
 ## Phase 1C: Homepage & Navigation
 
-- [ ] 21. Build `HomeController` and homepage view
+- [x] 21. Build `HomeController` and homepage view
+- [ ] 21a. Setup Tailwind CSS (verify installation and configuration)
 - [ ] 22. Create navigation layout (authenticated vs public)
 - [ ] 23. Add static `PagesController` (about, contact, resources)
 - [ ] 24. Link to prayer PDF on resources page
 
+## Phase 1G: UI & Styling
+
+- [ ] 25. Style homepage with featured content
+- [ ] 26. Style admin interface (blogs/stories CRUD views)
+- [ ] 27. Style public blogs index and show pages
+- [ ] 28. Style public stories index and show pages
+- [ ] 29. Add responsive navigation with authentication states
+- [ ] 30. Style forms (new/edit) for admin
+- [ ] 31. Add basic layout improvements (header, footer, typography)
+
 ## Phase 1D: Storage & AWS
 
-- [ ] 25. Install Active Storage (`rails active_storage:install`)
-- [ ] 26. Add `has_one_attached :header_image` to Blog and Story
-- [ ] 27. Add image upload fields to admin forms
-- [ ] 28. Test image uploads work locally
-- [ ] 29. Configure AWS S3 credentials in `.env.local` (prepare, don't switch yet)
+- [ ] 32. Install Active Storage (`rails active_storage:install`)
+- [ ] 33. Add `has_one_attached :header_image` to Blog and Story
+- [ ] 34. Add image upload fields to admin forms
+- [ ] 35. Test image uploads work locally
+- [ ] 36. Configure AWS S3 credentials in `.env.local` (prepare, don't switch yet)
 
 ## Phase 1E: Testing & Caching
 
-- [ ] 30. Ensure comprehensive RSpec coverage (models, controllers, requests)
-- [ ] 31. Add Redis caching to Blog/Story controllers
-- [ ] 32. Add cache invalidation callbacks to models
-- [ ] 33. Test cache invalidation works (check logs)
-- [ ] 34. Run full test suite (`just test` must be green)
-- [ ] 35. Fix any RuboCop violations (`just lint`)
+- [ ] 37. Ensure comprehensive RSpec coverage (models, controllers, requests)
+- [ ] 38. Add Redis caching to Blog/Story controllers
+- [ ] 39. Add cache invalidation callbacks to models
+- [ ] 40. Test cache invalidation works (check logs)
+- [ ] 41. Run full test suite (`just test` must be green)
+- [ ] 42. Fix any RuboCop violations (`just lint`)
 
 ## Phase 1F: Database & Deployment
 
-- [ ] 36. Switch to PostgreSQL locally (`dev stack up`)
-- [ ] 37. Verify all tests pass with PostgreSQL
-- [ ] 38. Create Heroku app
-- [ ] 39. Add PostgreSQL addon to Heroku
-- [ ] 40. Configure Heroku environment variables (secrets)
-- [ ] 41. Deploy to Heroku
-- [ ] 42. Run migrations on Heroku
-- [ ] 43. Verify all features work on Heroku
+- [ ] 43. Switch to PostgreSQL locally (`dev stack up`)
+- [ ] 44. Verify all tests pass with PostgreSQL
+- [ ] 45. Create Heroku app
+- [ ] 46. Add PostgreSQL addon to Heroku
+- [ ] 47. Configure Heroku environment variables (secrets)
+- [ ] 48. Deploy to Heroku
+- [ ] 49. Run migrations on Heroku
+- [ ] 50. Verify all features work on Heroku
 
 ---
 

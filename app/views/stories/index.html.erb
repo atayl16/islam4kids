@@ -1,9 +1,15 @@
-<h1>Stories</h1>
+<div class="max-w-4xl mx-auto">
+  <h1 class="text-4xl font-bold text-gray-800 mb-8">Stories</h1>
 
-<% @stories.each do |story| %>
-  <div class="story">
-    <h2><%= link_to story.title, story_path(story) %></h2>
-    <p><%= truncate(story.content, length: 150) %></p>
-    <p><small>Published: <%= story.created_at.strftime('%B %d, %Y') %></small></p>
+  <div class="space-y-6">
+    <% @stories.each do |story| %>
+      <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-3">
+          <%= link_to story.title, story_path(story), class: "text-green-600 hover:text-green-700 hover:underline" %>
+        </h2>
+        <p class="text-gray-600 mb-4 line-clamp-3"><%= truncate(story.content, length: 150) %></p>
+        <p class="text-sm text-gray-500">Published: <%= story.created_at.strftime('%B %d, %Y') %></p>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
