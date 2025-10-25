@@ -19,9 +19,6 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :blogs
-  end
-
-  namespace :public do
     resources :stories
   end
 end

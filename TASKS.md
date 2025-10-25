@@ -17,16 +17,16 @@ Work through these in order. Implement each task, then ask Claude to review.
 
 ## Phase 1B: Controllers & Views
 
-- [ ] 11. Create `Admin::BaseController` with authorization
-- [ ] 12. Build `Admin::BlogsController` (full CRUD)
-- [ ] 13. Build admin Blog views (index, show, new, edit, form partial)
-- [ ] 14. Build `Admin::StoriesController` (copy Blog pattern)
-- [ ] 15. Build admin Story views (copy Blog pattern)
-- [ ] 16. Build `Public::BlogsController` (index, show only)
-- [ ] 17. Build public Blog views (index, show)
-- [ ] 18. Build `Public::StoriesController` (index, show only)
-- [ ] 19. Build public Story views (copy Blog pattern)
-- [ ] 20. Write controller specs (admin authorization, CRUD actions)
+- [x] 11. Create `Admin::BaseController` with authorization
+- [x] 12. Build `Admin::BlogsController` (full CRUD)
+- [x] 13. Build admin Blog views (index, show, new, edit, form partial)
+- [x] 14. Build `Admin::StoriesController` (copy Blog pattern)
+- [x] 15. Build admin Story views (copy Blog pattern)
+- [x] 16. Build `Public::BlogsController` (index, show only)
+- [x] 17. Build public Blog views (index, show)
+- [x] 18. Build `Public::StoriesController` (index, show only)
+- [x] 19. Build public Story views (copy Blog pattern)
+- [x] 20. Write controller specs (admin authorization, CRUD actions)
 
 ## Phase 1C: Homepage & Navigation
 

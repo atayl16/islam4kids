@@ -1,0 +1,9 @@
+<h1>Stories</h1>
+
+<% @stories.each do |story| %>
+  <div class="story">
+    <h2><%= link_to story.title, public_story_path(story) %></h2>
+    <p><%= truncate(story.content, length: 150) %></p>
+    <p><small>Published: <%= story.created_at.strftime('%B %d, %Y') %></small></p>
+  </div>
+<% end %>

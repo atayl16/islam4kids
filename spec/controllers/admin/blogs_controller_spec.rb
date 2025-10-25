@@ -1,4 +1,4 @@
-#test that only admins can complete CRUD operations on blogs.
+# test that only admins can complete CRUD operations on blogs.
 require 'rails_helper'
 
 RSpec.describe Admin::BlogsController, type: :controller do
@@ -32,7 +32,8 @@ RSpec.describe Admin::BlogsController, type: :controller do
   it 'allows admin to edit a blog' do
     sign_in admin_user
     blog = FactoryBot.create(:blog)
-    put :update, params: { id: blog.id, blog: { title: 'Updated Blog', content: 'Updated Content', status: 'published' } }
+    put :update,
+        params: { id: blog.id, blog: { title: 'Updated Blog', content: 'Updated Content', status: 'published' } }
     expect(response).to redirect_to(admin_blog_path(Blog.last))
   end
 

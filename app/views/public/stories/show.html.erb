@@ -1,0 +1,8 @@
+<h1><%= @story.title %></h1>
+<p><small>Published: <%= @story.created_at.strftime('%B %d, %Y') %></small></p>
+
+<div class="content">
+  <%= simple_format(@story.content) %>
+</div>
+
+<%= link_to 'Back to Stories', public_stories_path %>

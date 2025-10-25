@@ -1,0 +1,9 @@
+<h1>Blogs</h1>
+
+<% @blogs.each do |blog| %>
+  <div class="blog">
+    <h2><%= link_to blog.title, public_blog_path(blog) %></h2>
+    <p><%= truncate(blog.content, length: 150) %></p>
+    <p><small>Published: <%= blog.created_at.strftime('%B %d, %Y') %></small></p>
+  </div>
+<% end %>
