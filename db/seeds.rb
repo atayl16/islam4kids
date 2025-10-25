@@ -19,3 +19,21 @@ User.find_or_create_by!(email: 'user@islam4kids.org') do |user|
   user.password = 'user123456' # Change this in production!
   user.is_admin = false
 end
+
+# Create draft blog
+Blog.find_or_create_by!(title: 'Draft Blog', content: 'This is a draft blog post.', status: 'draft')
+
+# Create published blog
+Blog.find_or_create_by!(title: 'Published Blog', content: 'This is a published blog post.', status: 'published')
+
+# Create archived blog
+Blog.find_or_create_by!(title: 'Archived Blog', content: 'This is an archived blog post.', status: 'archived')
+
+# Create draft story
+Story.find_or_create_by!(title: 'Draft Story', content: 'This is a draft story.', status: 'draft')
+
+# Create published story
+Story.find_or_create_by!(title: 'Published Story', content: 'This is a published story.', status: 'published')
+
+# Create archived story
+Story.find_or_create_by!(title: 'Archived Story', content: 'This is an archived story.', status: 'archived')

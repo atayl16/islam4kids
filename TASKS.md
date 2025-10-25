@@ -10,7 +10,7 @@ Work through these in order. Implement each task, then ask Claude to review.
 - [x] 4. Add `is_admin` boolean to User (migration + default: false)
 - [x] 5. Create seed admin user in `db/seeds.rb`
 - [x] 6. Test sign up/sign in flows manually
-- [ ] 7. Create `app/models/concerns/publishable.rb` concern
+- [x] 7. Create `app/models/concerns/publishable.rb` concern
 - [ ] 8. Generate Blog model with Publishable concern
 - [ ] 9. Generate Story model with Publishable concern
 - [ ] 10. Write model specs (User, Blog, Story validations/scopes)
@@ -90,5 +90,3 @@ rails db:seed                # Seed database
 ```
 
 ---
-
-**Current Task:** #7 - Create Publishable concern
