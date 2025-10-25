@@ -34,7 +34,7 @@ Work through these in order. Implement each task, then ask Claude to review.
 - [ ] 21a. Setup Tailwind CSS (verify installation and configuration)
 - [ ] 22. Create navigation layout (authenticated vs public)
 - [ ] 23. Add static `PagesController` (about, contact, resources)
-- [ ] 24. Link to prayer PDF on resources page
+- [x] 24. Link to prayer PDF on resources page (skip for now, there are many PDFs)
 
 ## Phase 1G: UI & Styling
 
