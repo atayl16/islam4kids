@@ -1,24 +1,37 @@
-# README
+# Islam4Kids
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails 8 content management platform for Islamic educational content - replacing the Wix site at islam4kids.org.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- Blog posts with header images
+- Stories with header images
+- Admin interface for content management
+- User authentication with Devise
+- Active Storage for image uploads
+- Beautiful Islamic-themed UI with Tailwind CSS
 
-* System dependencies
+## Setup
 
-* Configuration
+```bash
+bundle install
+bin/rails db:setup
+bin/dev  # Starts Rails + Tailwind watcher
+```
 
-* Database creation
+## Testing
 
-* Database initialization
+```bash
+just test  # Run RSpec tests
+just lint  # Run RuboCop
+```
 
-* How to run the test suite
+## Tech Stack
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Rails 8.0
+- Ruby 3.3+
+- SQLite (development) / PostgreSQL (production)
+- Tailwind CSS
+- Active Storage
+- Devise authentication
+- RSpec for testing
