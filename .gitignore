@@ -74,3 +74,6 @@ pickle-email-*.html
 
 # Ignore Claude Code settings
 .claude/settings.local.json
+
+# Ignore security scan reports
+reports/
