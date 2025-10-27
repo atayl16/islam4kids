@@ -71,3 +71,6 @@ pickle-email-*.html
 
 # Ignore RVM/rbenv files (unless using these)
 .rvmrc
+
+# Ignore Claude Code settings
+.claude/settings.local.json
