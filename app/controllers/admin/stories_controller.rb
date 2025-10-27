@@ -44,7 +44,7 @@ module Admin
     private
 
     def story_params
-      params.expect(story: %i[title content status])
+      params.expect(story: %i[title content status header_image])
     end
   end
 end

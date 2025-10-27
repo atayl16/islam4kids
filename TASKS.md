@@ -48,31 +48,63 @@ Work through these in order. Implement each task, then ask Claude to review.
 
 ## Phase 1D: Storage & AWS
 
-- [ ] 32. Install Active Storage (`rails active_storage:install`)
-- [ ] 33. Add `has_one_attached :header_image` to Blog and Story
-- [ ] 34. Add image upload fields to admin forms
-- [ ] 35. Test image uploads work locally
-- [ ] 36. Configure AWS S3 credentials in `.env.local` (prepare, don't switch yet)
+- [x] 32. Install Active Storage (`rails active_storage:install`)
+- [x] 33. Add `has_one_attached :header_image` to Blog and Story models
+- [x] 34. Add image upload fields to admin forms (blogs and stories)
+- [x] 35. Display uploaded images on admin show pages
+- [x] 36. Display uploaded images on public blog/story show pages
+- [x] 37. Test image uploads work locally (create, edit, delete)
+- [x] 38. Refactor image attachment and validations into Publishable concern
+- [ ] 39. Configure AWS S3 credentials in `.env.local` (prepare for production)
 
-## Phase 1E: Testing & Caching
+## Phase 1E: Testing & Quality
 
-- [ ] 37. Ensure comprehensive RSpec coverage (models, controllers, requests)
-- [ ] 38. Add Redis caching to Blog/Story controllers
-- [ ] 39. Add cache invalidation callbacks to models
-- [ ] 40. Test cache invalidation works (check logs)
-- [ ] 41. Run full test suite (`just test` must be green)
-- [ ] 42. Fix any RuboCop violations (`just lint`)
+- [ ] 42. Review and expand model specs (ensure all validations, scopes, methods covered)
+- [ ] 43. Review and expand controller specs (happy paths, edge cases, authorization)
+- [ ] 44. Write request specs for public controllers (blogs/stories index and show)
+- [ ] 45. Run full test suite (`just test` must be green)
+- [ ] 46. Fix any RuboCop violations (`just lint`)
+- [ ] 47. Run security scan (`dev scans`) and fix any issues
+- [ ] 48. Test admin workflows manually end-to-end (create, edit, publish, delete)
+
+## Phase 1E+: Caching (After Everything Works)
+
+- [ ] 49. Add Redis caching to Blog/Story controllers (collection and individual pages)
+- [ ] 50. Add cache invalidation callbacks to Blog and Story models
+- [ ] 51. Test cache invalidation works (check Rails logs)
+- [ ] 52. Verify caching doesn't break existing functionality
 
 ## Phase 1F: Database & Deployment
 
-- [ ] 43. Switch to PostgreSQL locally (`dev stack up`)
-- [ ] 44. Verify all tests pass with PostgreSQL
-- [ ] 45. Create Heroku app
-- [ ] 46. Add PostgreSQL addon to Heroku
-- [ ] 47. Configure Heroku environment variables (secrets)
-- [ ] 48. Deploy to Heroku
-- [ ] 49. Run migrations on Heroku
-- [ ] 50. Verify all features work on Heroku
+- [ ] 53. Switch to PostgreSQL locally (`dev stack up`)
+- [ ] 54. Update database.yml for PostgreSQL configuration
+- [ ] 55. Run migrations and verify all tests pass with PostgreSQL
+- [ ] 56. Create Heroku app (`heroku create islam4kids-app`)
+- [ ] 57. Add PostgreSQL addon to Heroku (`heroku addons:create heroku-postgresql`)
+- [ ] 58. Add Redis addon to Heroku (`heroku addons:create heroku-redis`) (for caching)
+- [ ] 59. Configure Heroku environment variables (Rails secret, AWS S3 credentials)
+- [ ] 60. Deploy to Heroku (`git push heroku main`)
+- [ ] 61. Run migrations on Heroku (`heroku run rails db:migrate`)
+- [ ] 62. Seed production database with sample content (`heroku run rails db:seed`)
+- [ ] 63. Verify all features work on Heroku (manual testing)
+- [ ] 64. Test image uploads work on Heroku (with S3)
+- [ ] 65. Test admin authentication and authorization on Heroku
+
+---
+
+## Phase 2: Post-MVP Features (Future)
+
+**These are enhancements to add AFTER successful MVP deployment:**
+- Category filtering for blogs and stories
+- Featured content section on homepage
+- Search functionality
+- Comments system
+- User profiles
+- Newsletter signup
+- Social sharing
+- Analytics
+- Model specs for image attachment validations
+- Request specs for image upload in admin controllers
 
 ---
 
@@ -91,13 +123,34 @@ Work through these in order. Implement each task, then ask Claude to review.
 ## Quick Commands
 
 ```bash
+bin/dev                      # Start Rails + Tailwind watcher (recommended)
 just test                    # Run all tests
 just lint                    # Run RuboCop
 dev scans                    # Security scan
-rails s                      # Start server
 rails c                      # Open console
 rails db:migrate             # Run migrations
 rails db:seed                # Seed database
+rails db:reset               # Drop, create, migrate, seed (fresh start)
 ```
 
 ---
+
+## Notes
+
+- **Phase 2 features** (categories, featured content, etc.) are documented but deferred until after MVP launch
+- **Phase 1E+** (caching) comes AFTER everything works and is tested
+- Test incrementally as you build features (don't wait until the end)
+- Active Storage will need S3 for Heroku deployment
+- Remember to run `bin/dev` instead of `rails s` to compile Tailwind CSS
+
+---
+
+**Current Status:** Phase 1D Complete ✅ - Active Storage with image uploads and validations!
+**Next Up:** Phase 1E - Testing & Quality 🧪
+**Tasks Remaining:** 27 tasks to MVP deployment
+
+**Recent Progress:**
+- Refactored image attachments and validations into Publishable concern (DRY principle)
+- Fixed Strong Parameters issue preventing image uploads
+- Added proper image display to admin and public views
+- Deferred non-critical image validation specs to Phase 2

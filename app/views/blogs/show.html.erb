@@ -27,6 +27,12 @@
       </div>
     </div>
 
+    <% if @blog.header_image.attached? %>
+      <div class="flex items-center justify-center mb-8">
+        <%= image_tag @blog.header_image, class: 'w-full h-auto rounded-lg shadow-lg' %>
+      </div>
+    <% end %>
+
     <!-- Content Section -->
     <div class="px-8 md:px-12 py-12">
       <div class="prose prose-lg prose-slate max-w-none">

@@ -3,7 +3,10 @@
     "allow": [
       "Bash(echo $ANTHROPIC_API_KEY)",
       "Bash(env)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(bin/rails console:*)",
+      "Bash(bundle install:*)",
+      "Bash(bundle exec rspec:*)"
     ],
     "deny": [],
     "ask": []

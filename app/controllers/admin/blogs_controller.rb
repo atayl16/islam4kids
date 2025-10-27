@@ -44,7 +44,7 @@ module Admin
     private
 
     def blog_params
-      params.expect(blog: %i[title content status])
+      params.expect(blog: %i[title content status header_image])
     end
   end
 end

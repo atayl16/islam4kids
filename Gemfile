@@ -77,3 +77,6 @@ group :development, :test do
 end
 
 gem "devise", "~> 4.9"
+
+# Validations for Active Storage attachments
+gem "active_storage_validations"
