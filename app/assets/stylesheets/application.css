@@ -13,3 +13,50 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/*
+ * Brand Theme Overrides
+ * Map commonly used Tailwind color tokens to the site's brand palette
+ * so existing utility classes adopt the new colors without view changes.
+ *
+ * Brand colors provided:
+ *  - Greens: #8A9A5B (sage), #2D5A27 (dark)
+ *  - Accent: #CC7357 (terracotta)
+ *  - Base:   #FFF8E7 (light), #2D5B7E (blue)
+ */
+:root {
+  /* Base background tints */
+  --color-slate-50: #FFF8E7;   /* light background */
+  --color-slate-100: #FBF1DB;  /* subtle section bg */
+
+  /* Green family mapped onto emerald scale (keep 500+ dark for white text contrast) */
+  --color-emerald-50:  #F2F6EA;
+  --color-emerald-100: #E8EED8;
+  --color-emerald-200: #DCE6C3;
+  --color-emerald-300: #CFDDAE;
+  --color-emerald-400: #A7B87B; /* lighter sage for borders/accents */
+  --color-emerald-500: #2D5A27; /* primary dark green for buttons/alerts */
+  --color-emerald-600: #254C22;
+  --color-emerald-700: #1E3D1B;
+  --color-emerald-800: #162F14;
+  --color-emerald-900: #0F210E;
+
+  /* Blue family mapped onto violet scale (brand blue) */
+  --color-violet-50:  #EAF2F8;
+  --color-violet-100: #D8E6F2;
+  --color-violet-200: #BBD2E6;
+  --color-violet-400: #5E8FB5;
+  --color-violet-500: #2D5B7E; /* brand blue for headings/links */
+  --color-violet-600: #244A65;
+  --color-violet-700: #1C3B51;
+  --color-violet-800: #152D3E;
+  --color-violet-900: #0F2130;
+
+  /* Terracotta accent mapped onto amber scale */
+  --color-amber-100: #F5E0D9;
+  --color-amber-400: #E59C84;
+  --color-amber-500: #CC7357; /* accent buttons/underlines */
+  --color-amber-600: #B35F46;
+  --color-amber-800: #7A3F2D;
+  --color-amber-900: #5D2F22;
+}
