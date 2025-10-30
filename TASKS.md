@@ -64,6 +64,7 @@ Work through these in order. Implement each task, then ask Claude to review.
 - [x] 44. Write request specs for public controllers (blogs/stories index and show) **[SKIPPED - Tests written incrementally]**
 - [x] 45. Run full test suite (`just test` must be green)
 - [x] 46. Fix any RuboCop violations (`just lint`)
+- [x] 46a. Add GitHub Actions CI with Postgres service (db:prepare + tests)
 - [x] 47. Run security scan (`dev scans`) and fix any issues
 - [x] 48. Test admin workflows manually end-to-end (create, edit, publish, delete) **[SKIPPED - Manual testing done incrementally]**
 
@@ -89,6 +90,21 @@ Work through these in order. Implement each task, then ask Claude to review.
 - [ ] 63. Verify all features work on Heroku (manual testing)
 - [ ] 64. Test image uploads work on Heroku (with S3)
 - [ ] 65. Test admin authentication and authorization on Heroku
+
+## Phase 1H: Content Parity Before Deployment
+
+Goal: Bring the Rails app closer to the current `islam4kids.org` so it's valuable before incurring Heroku costs.
+
+- [ ] 66. Add downloadable PDFs section to Resources page
+  - Auto-list files from `public/pdfs/` with filename, file size, and a download button
+  - Group by simple subfolders (e.g., posters, books) if present
+- [ ] 67. Add a few initial PDFs into `public/pdfs/` (placeholders ok)
+- [ ] 68. Create Games page (route + view)
+  - Embed external web games via `<iframe>` with responsive aspect ratio
+  - Show descriptions and external source attribution
+- [ ] 69. Update Content Security Policy to allow iframes from approved hosts
+- [ ] 70. Add navigation link to Games and enhance Resources styling
+- [ ] 71. Accessibility/contrast pass for new pages (buttons, links, focus states)
 
 ---
 
