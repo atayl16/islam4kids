@@ -6,7 +6,18 @@
       "Bash(cat:*)",
       "Bash(bin/rails console:*)",
       "Bash(bundle install:*)",
-      "Bash(bundle exec rspec:*)"
+      "Bash(bundle exec rspec:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(overcommit --sign:*)",
+      "Bash(bundle exec bundle-audit:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)",
+      "Bash(git config:*)",
+      "Bash(redis-cli:*)",
+      "Bash(test:*)",
+      "Bash(rails runner:*)"
     ],
     "deny": [],
     "ask": []
