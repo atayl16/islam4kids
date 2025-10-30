@@ -1,0 +1,6 @@
+#!/bin/bash
+# Wrapper script for bundler-audit that ignores git push arguments
+# Git passes remote name and URL as arguments to pre-push hooks,
+# but bundler-audit doesn't accept these arguments
+
+bundle exec bundler-audit check --update

@@ -23,7 +23,5 @@ PrePush:
   BundleAudit:
     enabled: true
     required_executable: 'bundler-audit'
-    command: ['bundle', 'exec', 'bundler-audit', 'check', '--update']
-    flags: []
-    include_stdin: false
+    command: ['bin/bundler-audit-hook']
 
