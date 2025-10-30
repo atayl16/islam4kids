@@ -77,3 +77,6 @@ pickle-email-*.html
 
 # Ignore security scan reports
 reports/
+
+# Ignore tasks file
+TASKS.md
