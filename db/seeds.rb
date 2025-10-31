@@ -88,6 +88,29 @@ if Story.none?
   end
 end
 
+# Helper method to attach files to printables
+def attach_printable_files(printable, title)
+  pdf_content = "%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj " \
+                '2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj ' \
+                "3 0 obj<</Type/Page/MediaBox[0 0 612 792]/Parent 2 0 R/Resources<<>>>>endobj\n" \
+                "xref\n0 4\ntrailer<</Size 4/Root 1 0 R>>\nstartxref\n149\n%%EOF"
+  printable.pdf_file.attach(
+    io: StringIO.new(pdf_content),
+    filename: "#{title.parameterize}.pdf",
+    content_type: 'application/pdf'
+  )
+
+  # Create a simple 1x1 pixel PNG
+  png_content = "\x89PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01" \
+                "\b\x02\x00\x00\x00\x90wS\xDE\x00\x00\x00\fIDATx\x9Cc\x00\x01\x00\x00" \
+                "\x05\x00\x01\r\n-\xB4\x00\x00\x00\x00IEND\xAEB`\x82"
+  printable.thumbnail_image.attach(
+    io: StringIO.new(png_content),
+    filename: "#{title.parameterize}-thumbnail.png",
+    content_type: 'image/png'
+  )
+end
+
 # Create sample printables
 if Printable.none?
   Rails.logger.debug 'Creating sample printables...'
@@ -183,26 +206,4 @@ if Printable.none?
   end
 
   Rails.logger.debug { "Created #{Printable.count} printables" }
-end
-
-def attach_printable_files(printable, title)
-  pdf_content = "%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj " \
-                '2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj ' \
-                "3 0 obj<</Type/Page/MediaBox[0 0 612 792]/Parent 2 0 R/Resources<<>>>>endobj\n" \
-                "xref\n0 4\ntrailer<</Size 4/Root 1 0 R>>\nstartxref\n149\n%%EOF"
-  printable.pdf_file.attach(
-    io: StringIO.new(pdf_content),
-    filename: "#{title.parameterize}.pdf",
-    content_type: 'application/pdf'
-  )
-
-  # Create a simple 1x1 pixel PNG
-  png_content = "\x89PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01" \
-                "\b\x02\x00\x00\x00\x90wS\xDE\x00\x00\x00\fIDATx\x9Cc\x00\x01\x00\x00" \
-                "\x05\x00\x01\r\n-\xB4\x00\x00\x00\x00IEND\xAEB`\x82"
-  printable.thumbnail_image.attach(
-    io: StringIO.new(png_content),
-    filename: "#{title.parameterize}-thumbnail.png",
-    content_type: 'image/png'
-  )
 end
