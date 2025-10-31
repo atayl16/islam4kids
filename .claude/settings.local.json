@@ -17,7 +17,8 @@
       "Bash(git config:*)",
       "Bash(redis-cli:*)",
       "Bash(test:*)",
-      "Bash(rails runner:*)"
+      "Bash(rails runner:*)",
+      "Bash(bin/rails db:migrate:*)"
     ],
     "deny": [],
     "ask": []

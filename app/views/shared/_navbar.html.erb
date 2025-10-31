@@ -35,6 +35,16 @@
           <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-violet-600 group-hover:w-full transition-all duration-300"></div>
         <% end %>
 
+        <%= link_to printables_path, class: "relative group" do %>
+          <span class="text-slate-700 hover:text-amber-600 font-semibold transition-colors flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+            <span>Printables</span>
+          </span>
+          <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></div>
+        <% end %>
+
         <!-- Divider -->
         <div class="h-8 w-px bg-slate-200"></div>
 

@@ -1,4 +1,3 @@
-# All users can view stories but not complete CRUD operations
 class StoriesController < ApplicationController
   def index
     @stories = Rails.cache.fetch('stories/published-collection', expires_in: 12.hours) do

@@ -1,7 +1,8 @@
 /*
- * Import Tailwind CSS
+ * Import Tailwind CSS from source
+ * Tailwind CSS Rails will process this automatically
  */
-@import "../builds/tailwind.css";
+@import "../tailwind/application.css";
 
 /*
  * This is a manifest file that'll be compiled into application.css.

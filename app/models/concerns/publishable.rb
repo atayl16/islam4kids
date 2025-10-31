@@ -11,20 +11,6 @@ module Publishable
       archived: 'archived'
     }
 
-    # Shared header image attachment
-    has_one_attached :header_image
-
-    # Image validations
-    validates :header_image,
-              content_type: {
-                in: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
-                message: 'must be a PNG, JPG, GIF, or WebP image'
-              },
-              size: {
-                less_than: 5.megabytes,
-                message: 'must be less than 5MB'
-              }
-
     # Cache invalidation callbacks
     after_commit :clear_cache
   end
@@ -32,7 +18,7 @@ module Publishable
   private
 
   def clear_cache
-    model_name = self.class.name.downcase.pluralize # "blogs" or "stories"
+    model_name = self.class.name.downcase.pluralize
     Rails.cache.delete("#{model_name}/published-collection")
     Rails.cache.delete("#{model_name}/#{id}")
   end

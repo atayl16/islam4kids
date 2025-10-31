@@ -74,9 +74,13 @@ pickle-email-*.html
 
 # Ignore Claude Code settings
 .claude/settings.local.json
+.claude
 
 # Ignore security scan reports
 reports/
 
 # Ignore tasks file
 TASKS.md
+
+# Ignore import docs
+docs/*

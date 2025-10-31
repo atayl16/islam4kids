@@ -1,4 +1,3 @@
-# All users can view blogs but not complete CRUD operations
 class BlogsController < ApplicationController
   def index
     @blogs = Rails.cache.fetch('blogs/published-collection', expires_in: 12.hours) do

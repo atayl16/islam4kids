@@ -17,9 +17,11 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :blogs, only: [:index, :show]
   resources :stories, only: [:index, :show]
+  resources :printables, only: [:index, :show]
 
   namespace :admin do
     resources :blogs
     resources :stories
+    resources :printables
   end
 end
