@@ -17,7 +17,7 @@
             <span class="text-sm"><%= @printable.created_at.strftime('%B %d, %Y at %I:%M %p') %></span>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full <%= @printable.status == 'published' ? 'bg-emerald-400 text-emerald-900' : @printable.status == 'draft' ? 'bg-amber-400 text-amber-900' : 'bg-slate-300 text-slate-700' %>">
+            <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full <%= status_badge_classes(@printable.status, color_scheme: :emerald) %>">
               <%= @printable.status.titleize %>
             </span>
           </div>
@@ -53,7 +53,7 @@
             Thumbnail Image
           </h3>
           <div class="border-2 border-emerald-200 rounded-lg overflow-hidden max-w-md">
-            <%= image_tag @printable.thumbnail_image, class: 'w-full h-auto' %>
+            <%= image_tag @printable.thumbnail_image, class: 'w-full h-auto', alt: "Thumbnail for #{@printable.title}" %>
           </div>
         </div>
       <% end %>
@@ -97,7 +97,7 @@
           </h3>
           <div class="space-y-4">
             <div class="border-2 border-emerald-200 rounded-lg overflow-hidden max-w-2xl">
-              <%= image_tag @printable.image_file, class: 'w-full h-auto' %>
+              <%= image_tag @printable.image_file, class: 'w-full h-auto', alt: "Image file for #{@printable.title}" %>
             </div>
             <div class="flex items-center space-x-4 p-4 bg-emerald-50 rounded-lg border-2 border-emerald-200">
               <svg class="w-12 h-12 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -27,36 +27,38 @@
     <%= render "shared/navbar" %>
 
     <!-- Flash Messages -->
-    <% if notice.present? %>
-      <div data-controller="flash" data-flash-auto-dismiss-value="5000" class="fixed top-24 right-4 z-40 max-w-md animate-slide-in">
-        <div class="bg-emerald-500 text-white px-6 py-4 rounded-xl shadow-2xl flex items-start space-x-3" role="alert">
-          <svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <p class="flex-1 font-medium"><%= notice %></p>
-          <button type="button" data-action="click->flash#dismiss" class="flex-shrink-0 text-white hover:text-emerald-100 transition-colors ml-2" aria-label="Close">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    <div class="fixed top-24 right-4 z-40 max-w-md space-y-4">
+      <% if notice.present? %>
+        <div data-controller="flash" data-flash-auto-dismiss-value="5000" class="animate-slide-in">
+          <div class="bg-emerald-500 text-white px-6 py-4 rounded-xl shadow-2xl flex items-start space-x-3" role="alert">
+            <svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-          </button>
+            <p class="flex-1 font-medium"><%= notice %></p>
+            <button type="button" data-action="click->flash#dismiss" class="flex-shrink-0 text-white hover:text-emerald-100 transition-colors ml-2" aria-label="Close">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    <% end %>
-    <% if alert.present? %>
-      <div data-controller="flash" data-flash-auto-dismiss-value="5000" class="fixed top-24 right-4 z-40 max-w-md animate-slide-in">
-        <div class="bg-red-500 text-white px-6 py-4 rounded-xl shadow-2xl flex items-start space-x-3" role="alert">
-          <svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <p class="flex-1 font-medium"><%= alert %></p>
-          <button type="button" data-action="click->flash#dismiss" class="flex-shrink-0 text-white hover:text-red-100 transition-colors ml-2" aria-label="Close">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      <% end %>
+      <% if alert.present? %>
+        <div data-controller="flash" data-flash-auto-dismiss-value="5000" class="animate-slide-in">
+          <div class="bg-red-500 text-white px-6 py-4 rounded-xl shadow-2xl flex items-start space-x-3" role="alert">
+            <svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-          </button>
+            <p class="flex-1 font-medium"><%= alert %></p>
+            <button type="button" data-action="click->flash#dismiss" class="flex-shrink-0 text-white hover:text-red-100 transition-colors ml-2" aria-label="Close">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 
     <main class="container mx-auto mt-28 px-5 py-8 min-h-screen">
       <%= yield %>

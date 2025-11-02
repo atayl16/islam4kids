@@ -1,6 +1,9 @@
 class Printable < ApplicationRecord
   include Publishable
 
+  # Ignore removed column during migration rollback
+  self.ignored_columns += [:published_at]
+
   validates :title, presence: true
   validates :status, presence: true
 

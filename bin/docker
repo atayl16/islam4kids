@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+# Convenience script for running common commands in Docker containers
+
+set -e
+
+COMMAND="${1:-help}"
+
+case "$COMMAND" in
+  up|start)
+    echo "Starting all services..."
+    docker-compose up -d
+    echo "Services started. View logs with: bin/docker logs"
+    ;;
+  down|stop)
+    echo "Stopping all services..."
+    docker-compose down
+    ;;
+  restart)
+    echo "Restarting services..."
+    docker-compose restart web
+    ;;
+  logs)
+    docker-compose logs -f web "${@:2}"
+    ;;
+  console|c)
+    docker-compose exec web bin/rails console
+    ;;
+  db:*)
+    # Strip "db:" prefix and pass to rails db command
+    DB_COMMAND="${COMMAND#db:}"
+    docker-compose exec web bin/rails db:"$DB_COMMAND" "${@:2}"
+    ;;
+  rails)
+    shift
+    docker-compose exec web bin/rails "$@"
+    ;;
+  rspec|test)
+    shift
+    docker-compose exec web bundle exec rspec "$@"
+    ;;
+  shell|sh|bash)
+    docker-compose exec web bash
+    ;;
+  build)
+    docker-compose build "${@:2}"
+    ;;
+  ps|status)
+    docker-compose ps
+    ;;
+  help|--help|-h)
+    cat <<EOF
+Docker convenience commands for Islam4Kids
+
+Usage: bin/docker <command> [args...]
+
+Commands:
+  up, start              Start all services (docker-compose up -d)
+  down, stop             Stop all services (docker-compose down)
+  restart                Restart the web service
+  logs [service]         View logs (default: web)
+  console, c             Open Rails console
+  db:migrate             Run database migrations
+  db:seed                Seed the database
+  db:create              Create databases
+  db:reset               Reset databases
+  rails <command>        Run any Rails command
+  rspec, test [args]     Run tests
+  shell, sh, bash        Open a shell in the web container
+  build [service]        Build Docker images
+  ps, status             Show running services
+  help                   Show this help
+
+Examples:
+  bin/docker up
+  bin/docker console
+  bin/docker db:migrate
+  bin/docker rails routes
+  bin/docker rspec spec/models
+EOF
+    ;;
+  *)
+    echo "Unknown command: $COMMAND"
+    echo "Run 'bin/docker help' for available commands"
+    exit 1
+    ;;
+esac
+

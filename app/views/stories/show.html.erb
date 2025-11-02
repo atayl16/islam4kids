@@ -35,7 +35,7 @@
 
     <% if @story.header_image.attached? %>
       <div class="flex items-center justify-center mb-8 px-8 md:px-12">
-        <%= image_tag @story.header_image, class: 'w-full h-auto rounded-lg shadow-lg' %>
+        <%= image_tag @story.header_image, class: 'w-full h-auto rounded-lg shadow-lg', alt: @story.title %>
       </div>
     <% end %>
 

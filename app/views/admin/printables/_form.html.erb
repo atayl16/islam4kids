@@ -40,7 +40,7 @@
           <% begin %>
             <div class="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
               <div class="flex items-start space-x-3">
-                <%= image_tag @printable.thumbnail_image, class: 'h-32 w-32 object-cover rounded-lg shadow-sm flex-shrink-0' %>
+                  <%= image_tag @printable.thumbnail_image, class: 'h-32 w-32 object-cover rounded-lg shadow-sm flex-shrink-0', alt: "Thumbnail for #{@printable.title}" %>
                 <div class="flex-1">
                   <p class="text-xs text-gray-500 mb-2">Current thumbnail:</p>
                   <p class="text-sm font-medium text-gray-700 mb-1"><%= @printable.thumbnail_image.filename %></p>
@@ -58,7 +58,7 @@
           <div class="mt-2 text-xs text-gray-500 p-3 bg-blue-50 rounded-lg border border-blue-200">
             <p class="mb-2">Currently using image_file as thumbnail (no separate thumbnail uploaded)</p>
             <% begin %>
-              <%= image_tag @printable.image_file, class: 'h-32 w-32 object-cover rounded-lg shadow-sm' %>
+              <%= image_tag @printable.image_file, class: 'h-32 w-32 object-cover rounded-lg shadow-sm', alt: "Image for #{@printable.title}" %>
             <% rescue ArgumentError => e %>
               <!-- Image attachment is not yet persisted -->
             <% end %>
@@ -80,8 +80,12 @@
           <div class="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-sm font-medium text-gray-700"><%= @printable.pdf_file.filename %></p>
-                <p class="text-xs text-gray-500"><%= number_to_human_size(@printable.pdf_file.byte_size) %></p>
+                <% begin %>
+                  <p class="text-sm font-medium text-gray-700"><%= @printable.pdf_file.filename %></p>
+                  <p class="text-xs text-gray-500"><%= number_to_human_size(@printable.pdf_file.byte_size) %></p>
+                <% rescue ArgumentError => e %>
+                  <p class="text-xs text-gray-500">PDF file attachment is being processed...</p>
+                <% end %>
               </div>
               <label class="flex items-center space-x-2 text-sm text-red-600 cursor-pointer hover:text-red-700">
                 <%= check_box_tag 'printable[remove_pdf_file]', '1', false, class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded' %>
@@ -107,13 +111,17 @@
           <div class="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
             <div class="flex items-start space-x-3">
               <% begin %>
-                <%= image_tag @printable.image_file, class: 'h-32 w-32 object-cover rounded-lg shadow-sm flex-shrink-0' %>
+                <%= image_tag @printable.image_file, class: 'h-32 w-32 object-cover rounded-lg shadow-sm flex-shrink-0', alt: "Image file for #{@printable.title}" %>
               <% rescue ArgumentError => e %>
                 <!-- Image attachment is not yet persisted -->
               <% end %>
               <div class="flex-1">
-                <p class="text-sm font-medium text-gray-700 mb-1"><%= @printable.image_file.filename %></p>
-                <p class="text-xs text-gray-500 mb-2"><%= number_to_human_size(@printable.image_file.byte_size) %></p>
+                <% begin %>
+                  <p class="text-sm font-medium text-gray-700 mb-1"><%= @printable.image_file.filename %></p>
+                  <p class="text-xs text-gray-500 mb-2"><%= number_to_human_size(@printable.image_file.byte_size) %></p>
+                <% rescue ArgumentError => e %>
+                  <p class="text-xs text-gray-500 mb-2">Image file attachment is being processed...</p>
+                <% end %>
                 <label class="flex items-center space-x-2 text-sm text-red-600 cursor-pointer hover:text-red-700">
                   <%= check_box_tag 'printable[remove_image_file]', '1', false, class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded' %>
                   <span>Remove image file</span>

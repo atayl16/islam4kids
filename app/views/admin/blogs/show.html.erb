@@ -17,7 +17,7 @@
             <span class="text-sm"><%= @blog.created_at.strftime('%B %d, %Y at %I:%M %p') %></span>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full <%= @blog.status == 'published' ? 'bg-emerald-400 text-emerald-900' : @blog.status == 'draft' ? 'bg-amber-400 text-amber-900' : 'bg-slate-300 text-slate-700' %>">
+            <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full <%= status_badge_classes(@blog.status, color_scheme: :emerald) %>">
               <%= @blog.status.titleize %>
             </span>
           </div>
@@ -44,7 +44,7 @@
           Header Image
         </h3>
         <div class="border-2 border-emerald-200 rounded-lg overflow-hidden">
-          <%= image_tag @blog.header_image, class: 'w-full h-auto' %>
+          <%= image_tag @blog.header_image, class: 'w-full h-auto', alt: @blog.title %>
         </div>
       </div>
     <% end %>

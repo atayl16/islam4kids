@@ -65,7 +65,7 @@
             </span>
           </div>
           <% if printable.thumbnail_image.attached? %>
-            <%= image_tag printable.thumbnail_image, class: 'w-full max-w-md rounded-lg shadow-lg mb-6', alt: printable.title %>
+            <%= image_tag printable.thumbnail_image, class: 'w-full max-w-md rounded-lg shadow-lg mb-6', alt: printable.title, loading: 'lazy' %>
           <% end %>
           <p class="text-slate-700 text-lg mb-6 leading-relaxed"><%= simple_format(printable.description) %></p>
           <% if printable.pdf_file.attached? %>

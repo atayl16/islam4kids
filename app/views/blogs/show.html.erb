@@ -29,7 +29,7 @@
 
     <% if @blog.header_image.attached? %>
       <div class="flex items-center justify-center mb-8">
-        <%= image_tag @blog.header_image, class: 'w-full h-auto rounded-lg shadow-lg' %>
+        <%= image_tag @blog.header_image, class: 'w-full h-auto rounded-lg shadow-lg', alt: @blog.title %>
       </div>
     <% end %>
 

@@ -34,75 +34,110 @@ A Rails 8 content management platform for Islamic educational content - replacin
 
 ## Prerequisites
 
-- Ruby 3.3 or higher
-- Docker and Docker Compose (for PostgreSQL and Redis)
-- Node.js (for JavaScript dependencies)
-
-**Note:** This project uses Docker Compose to run PostgreSQL and Redis locally. No need to install them separately!
+- Docker and Docker Compose
+- No need to install Ruby, Node.js, PostgreSQL, or Redis separately - everything runs in Docker!
 
 ## Setup
 
-1. **Start Docker services** (PostgreSQL and Redis):
+1. **Build and start all services** (Rails, PostgreSQL, Redis):
 ```bash
+bin/docker build
+bin/docker up
+```
+
+Or use docker-compose directly:
+```bash
+docker-compose build
 docker-compose up -d
 ```
 
-2. **Clone the repository and install dependencies**:
+2. **Set up the database** (run once):
 ```bash
-bundle install
-```
-
-3. **Set up the database**:
-```bash
-bin/rails db:create
-bin/rails db:migrate
-bin/rails db:seed
+bin/docker db:create
+bin/docker db:migrate
+bin/docker db:seed
 ```
 
 Or run the automated setup:
 ```bash
-bin/setup
+docker-compose exec web bin/setup
 ```
 
-4. Install and configure git hooks:
+3. **View logs**:
 ```bash
-bundle exec overcommit --install
-overcommit --sign
+bin/docker logs
 ```
 
-5. Start the development server:
+4. **Access the application**:
+Open http://localhost:3000 in your browser
+
+## Development
+
+Use the convenience script `bin/docker` for common commands, or use `docker-compose` directly:
+
+**Using `bin/docker` (recommended):**
 ```bash
-bin/dev  # Starts Rails + Tailwind watcher + background jobs
+bin/docker up              # Start all services
+bin/docker down            # Stop all services
+bin/docker logs            # View logs
+bin/docker console         # Rails console
+bin/docker db:migrate      # Run migrations
+bin/docker rspec           # Run tests
+bin/docker shell           # Open shell in container
+bin/docker help            # Show all commands
+```
+
+**Using `docker-compose` directly:**
+```bash
+docker-compose exec web bin/rails console
+docker-compose exec web bin/rails db:migrate
+docker-compose exec web bundle exec rspec
+docker-compose restart web
+docker-compose down
+docker-compose down -v    # Stop and remove volumes (clean slate)
+```
+
+### Git Hooks (Optional)
+
+Install and configure git hooks:
+```bash
+docker-compose exec web bundle exec overcommit --install
+docker-compose exec web overcommit --sign
 ```
 
 ## Testing
 
 Run the full test suite:
 ```bash
-bundle exec rspec
+bin/docker rspec
+```
+
+Or:
+```bash
+docker-compose exec web bundle exec rspec
 ```
 
 Run specific test files:
 ```bash
-bundle exec rspec spec/models/post_spec.rb
+bin/docker rspec spec/models/post_spec.rb
 ```
 
 ## Code Quality
 
 Lint your code with RuboCop:
 ```bash
-bundle exec rubocop
+docker-compose exec web bundle exec rubocop
 ```
 
 Auto-correct RuboCop offenses:
 ```bash
-bundle exec rubocop --autocorrect-all
+docker-compose exec web bundle exec rubocop --autocorrect-all
 ```
 
 Check for security vulnerabilities:
 ```bash
-bundle exec brakeman
-bundle exec bundler-audit check --update
+docker-compose exec web bundle exec brakeman
+docker-compose exec web bundle exec bundler-audit check --update
 ```
 
 ## Git Hooks

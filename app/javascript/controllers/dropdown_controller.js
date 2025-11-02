@@ -5,10 +5,13 @@ export default class extends Controller {
 
   connect() {
     this.boundHandleClickOutside = this.handleClickOutside.bind(this)
+    this.boundHandleEscape = this.handleEscape.bind(this)
+    document.addEventListener('keydown', this.boundHandleEscape)
   }
 
   disconnect() {
     document.removeEventListener("click", this.boundHandleClickOutside)
+    document.removeEventListener("keydown", this.boundHandleEscape)
   }
 
   toggle(event) {
@@ -24,6 +27,10 @@ export default class extends Controller {
 
   open() {
     this.menuTarget.classList.remove("hidden")
+    const button = this.element.querySelector('button[aria-expanded]')
+    if (button) {
+      button.setAttribute('aria-expanded', 'true')
+    }
     if (this.hasIconTarget) {
       this.iconTarget.classList.add("rotate-180")
     }
@@ -36,6 +43,10 @@ export default class extends Controller {
 
   close() {
     this.menuTarget.classList.add("hidden")
+    const button = this.element.querySelector('button[aria-expanded]')
+    if (button) {
+      button.setAttribute('aria-expanded', 'false')
+    }
     if (this.hasIconTarget) {
       this.iconTarget.classList.remove("rotate-180")
     }

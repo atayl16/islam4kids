@@ -17,7 +17,7 @@
             <span class="text-sm"><%= @story.created_at.strftime('%B %d, %Y at %I:%M %p') %></span>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full <%= @story.status == 'published' ? 'bg-violet-400 text-violet-900' : @story.status == 'draft' ? 'bg-amber-400 text-amber-900' : 'bg-slate-300 text-slate-700' %>">
+            <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full <%= status_badge_classes(@story.status, color_scheme: :violet) %>">
               <%= @story.status.titleize %>
             </span>
           </div>
@@ -56,7 +56,7 @@
           Header Image
         </h3>
         <div class="border-2 border-violet-200 rounded-lg overflow-hidden">
-          <%= image_tag @story.header_image, class: 'w-full h-auto' %>
+          <%= image_tag @story.header_image, class: 'w-full h-auto', alt: @story.title %>
         </div>
       </div>
     <% end %>

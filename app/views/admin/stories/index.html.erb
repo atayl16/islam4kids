@@ -60,7 +60,7 @@
               <div class="text-xs text-slate-500 mt-1"><%= truncate(story.content, length: 50) %></div>
             </td>
             <td class="px-6 py-5 whitespace-nowrap">
-              <span class="px-3 py-1.5 inline-flex text-xs font-bold rounded-full shadow-sm <%= story.status == 'published' ? 'bg-violet-100 text-violet-800 ring-1 ring-violet-600' : story.status == 'draft' ? 'bg-amber-100 text-amber-800 ring-1 ring-amber-600' : 'bg-slate-100 text-slate-800 ring-1 ring-slate-600' %>">
+              <span class="px-3 py-1.5 inline-flex text-xs font-bold rounded-full shadow-sm <%= status_badge_index_classes(story.status, color_scheme: :violet) %>">
                 <%= story.status.titleize %>
               </span>
             </td>

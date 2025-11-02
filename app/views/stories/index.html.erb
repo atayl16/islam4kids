@@ -17,13 +17,13 @@
       <%= link_to story_path(story), class: "group block" do %>
         <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-violet-400 transform hover:-translate-y-2">
           <!-- Header Image or Gradient -->
-          <% if story.header_image.attached? %>
-            <div class="relative h-48 w-full overflow-hidden bg-gradient-to-br from-violet-500 to-violet-600">
-              <%= image_tag story.header_image, class: 'w-full h-full object-cover group-hover:scale-110 transition-transform duration-300', alt: story.title %>
-            </div>
-          <% else %>
-            <div class="h-3 bg-gradient-to-r from-violet-500 via-violet-400 to-amber-400"></div>
-          <% end %>
+          <div class="relative w-full overflow-hidden bg-gradient-to-br from-violet-500 to-violet-600" style="min-height: 192px;">
+            <% if story.header_image.attached? %>
+              <%= image_tag story.header_image, class: 'w-full h-full object-cover group-hover:scale-110 transition-transform duration-300', alt: story.title, loading: 'lazy' %>
+            <% else %>
+              <div class="h-full bg-gradient-to-r from-violet-500 via-violet-400 to-amber-400"></div>
+            <% end %>
+          </div>
 
           <!-- Card Content -->
           <div class="p-8">

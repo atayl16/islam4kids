@@ -55,6 +55,9 @@
               <button 
                 type="button" 
                 data-action="click->dropdown#toggle"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="Admin menu"
                 class="relative group inline-flex items-center space-x-2 text-slate-700 hover:text-amber-600 font-semibold transition-colors px-3 py-2 rounded-lg hover:bg-amber-50"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,6 +73,8 @@
               <!-- Dropdown Menu -->
               <div 
                 data-dropdown-target="menu"
+                role="menu"
+                aria-orientation="vertical"
                 class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border-2 border-slate-100 overflow-hidden z-50"
               >
                 <div class="py-2">
