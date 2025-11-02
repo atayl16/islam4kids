@@ -28,13 +28,10 @@ module Admin
 
     def update
       @printable = Printable.find(params[:id])
-
-      # Track which attachments should be removed (but don't purge yet)
       attachments_to_remove = collect_attachments_to_remove
 
       if @printable.update(printable_params)
-        # Only purge attachments after successful update to prevent data loss
-        purge_attachments(attachments_to_remove)
+        purge_attachments_safely(attachments_to_remove)
         redirect_to admin_printable_path(@printable), notice: 'Printable was successfully updated.'
       else
         render :edit, status: :unprocessable_entity
@@ -55,6 +52,13 @@ module Admin
         attachments << attachment_name if params.dig(:printable, "remove_#{attachment_name}") == '1'
       end
       attachments
+    end
+
+    def purge_attachments_safely(attachment_names)
+      purge_attachments(attachment_names)
+    rescue StandardError => e
+      Rails.logger.error("Failed to purge attachments: #{e.message}")
+      # Optionally flash a warning to the user
     end
 
     def purge_attachments(attachment_names)

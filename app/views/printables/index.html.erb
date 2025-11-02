@@ -64,8 +64,14 @@
               <%= printable.printable_type.titleize %>
             </span>
           </div>
-          <% if printable.thumbnail_image.attached? %>
-            <%= image_tag printable.thumbnail_image, class: 'w-full max-w-md rounded-lg shadow-lg mb-6', alt: printable.title, loading: 'lazy' %>
+          <% if printable.display_thumbnail %>
+            <% if printable.image_file.attached? %>
+              <%= link_to rails_blob_path(printable.image_file), target: '_blank', class: 'block mb-6' do %>
+                <%= image_tag printable.display_thumbnail, class: 'w-full max-w-md rounded-lg shadow-lg', alt: printable.title %>
+              <% end %>
+            <% else %>
+              <%= image_tag printable.display_thumbnail, class: 'w-full max-w-md rounded-lg shadow-lg mb-6', alt: printable.title %>
+            <% end %>
           <% end %>
           <p class="text-slate-700 text-lg mb-6 leading-relaxed"><%= simple_format(printable.description) %></p>
           <% if printable.pdf_file.attached? %>
@@ -75,6 +81,24 @@
               </svg>
               Download PDF
             <% end %>
+          <% elsif printable.image_file.attached? %>
+            <%= link_to rails_blob_path(printable.image_file, disposition: "attachment"), class: 'inline-flex items-center px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200' do %>
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              Download Image
+            <% end %>
+            <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <div class="flex items-start">
+                <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                  <p class="text-sm font-semibold text-blue-900 mb-1">Printing Instructions:</p>
+                  <p class="text-sm text-blue-800">Click the image above to open it in a new tab, then use your browser's print function (Ctrl+P or Cmd+P) to print it.</p>
+                </div>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Convenience script for running common commands in Docker containers
 
-set -e
+set -euo pipefail
 
 COMMAND="${1:-help}"
 
@@ -16,7 +16,7 @@ case "$COMMAND" in
     docker-compose down
     ;;
   restart)
-    echo "Restarting services..."
+    echo "Restarting web service..."
     docker-compose restart web
     ;;
   logs)

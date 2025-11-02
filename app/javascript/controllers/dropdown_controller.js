@@ -6,7 +6,6 @@ export default class extends Controller {
   connect() {
     this.boundHandleClickOutside = this.handleClickOutside.bind(this)
     this.boundHandleEscape = this.handleEscape.bind(this)
-    document.addEventListener('keydown', this.boundHandleEscape)
   }
 
   disconnect() {
@@ -35,6 +34,8 @@ export default class extends Controller {
       this.iconTarget.classList.add("rotate-180")
     }
     
+    document.addEventListener("keydown", this.boundHandleEscape)
+    
     // Small delay to avoid immediate click outside
     setTimeout(() => {
       document.addEventListener("click", this.boundHandleClickOutside)
@@ -51,6 +52,7 @@ export default class extends Controller {
       this.iconTarget.classList.remove("rotate-180")
     }
     document.removeEventListener("click", this.boundHandleClickOutside)
+    document.removeEventListener("keydown", this.boundHandleEscape)
   }
 
   handleClickOutside(event) {
@@ -61,7 +63,10 @@ export default class extends Controller {
 
   handleEscape(event) {
     if (event.key === "Escape") {
-      this.close()
+      const isOpen = !this.menuTarget.classList.contains("hidden")
+      if (isOpen) {
+        this.close()
+      }
     }
   }
 }

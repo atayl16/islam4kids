@@ -23,8 +23,8 @@ RUN apt-get update -qq && \
 ENV RAILS_ENV="development" \
     BUNDLE_PATH="/usr/local/bundle"
 
-# Install bundler
-RUN gem install bundler
+# Install bundler and foreman
+RUN gem install bundler foreman
 
 # Copy Gemfile and install dependencies
 COPY Gemfile Gemfile.lock ./
@@ -38,9 +38,6 @@ RUN bundle exec bootsnap precompile app/ lib/ || true
 
 # Expose port 3000
 EXPOSE 3000
-
-# Install foreman for running multiple processes
-RUN gem install foreman
 
 # Default command (can be overridden in docker-compose.yml)
 CMD ["./bin/dev"]

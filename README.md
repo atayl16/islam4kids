@@ -100,10 +100,6 @@ docker-compose down -v    # Stop and remove volumes (clean slate)
 ### Git Hooks (Optional)
 
 Install and configure git hooks:
-```bash
-docker-compose exec web bundle exec overcommit --install
-docker-compose exec web overcommit --sign
-```
 
 ## Testing
 
