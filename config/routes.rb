@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get "/about", to: "pages#about"
-  get "/contact", to: "pages#contact"
-  get "/resources", to: "pages#resources"
+  get '/about', to: 'pages#about'
+  get '/contact', to: 'pages#contact'
+  get '/resources', to: 'pages#resources'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -15,13 +15,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'home#index'
-  resources :blogs, only: [:index, :show]
-  resources :stories, only: [:index, :show]
-  resources :printables, only: [:index, :show]
+  resources :blogs, only: %i[index show]
+  resources :stories, only: %i[index show]
+  resources :printables, only: %i[index show]
+  resources :games, only: [:index]
 
   namespace :admin do
     resources :blogs
     resources :stories
     resources :printables
+    resources :games
   end
 end

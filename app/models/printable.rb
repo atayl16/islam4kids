@@ -54,8 +54,8 @@ class Printable < ApplicationRecord
               message: 'must be a PNG, JPG, GIF, or WebP image'
             },
             size: {
-              less_than: 1.megabyte,
-              message: 'must be less than 1MB'
+              less_than: 10.megabytes,
+              message: 'must be less than 10MB'
             },
             if: -> { thumbnail_image.attached? }
 

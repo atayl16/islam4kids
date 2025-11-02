@@ -12,7 +12,7 @@ export default class extends Controller {
     
     // Find modal container by ID if not using target
     if (!this.hasContainerTarget) {
-      this.modalContainer = document.getElementById('printable-modal')
+      this.modalContainer = document.getElementById('printable-modal') || document.getElementById('game-modal')
     }
     
     // Set initial state
@@ -26,9 +26,24 @@ export default class extends Controller {
 
   open(event) {
     const printableId = event.currentTarget.dataset.printableId
-    const content = document.getElementById(`printable-modal-content-${printableId}`)
+    const gameId = event.currentTarget.dataset.gameId
+    
+    // Find content by ID (supports both printables and games)
+    const contentId = printableId ? `printable-modal-content-${printableId}` : `game-modal-content-${gameId}`
+    const content = document.getElementById(contentId)
     
     if (content && this.hasBodyTarget) {
+      // For games, extract title and set it in the modal header
+      if (gameId) {
+        const gameTitle = content.dataset.gameTitle
+        if (gameTitle) {
+          const modalHeader = document.querySelector('#game-modal h3')
+          if (modalHeader) {
+            modalHeader.textContent = gameTitle
+          }
+        }
+      }
+      
       this.bodyTarget.innerHTML = content.innerHTML
       this.openValue = true
     }

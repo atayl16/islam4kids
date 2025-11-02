@@ -74,7 +74,7 @@ if Story.none?
     {
       title: 'The Honest Shepherd',
       summary: 'A beautiful story about honesty and trustworthiness that teaches children the importance of keeping promises.',
-      content: "Once upon a time, there was a young shepherd who watched over the sheep. Every day, he would call for help even when there was no danger. The villagers came running but found no wolf. One day, when a real wolf appeared, the shepherd called for help, but no one believed him. This story teaches us that honesty is the best policy and that we should always tell the truth.",
+      content: 'Once upon a time, there was a young shepherd who watched over the sheep. Every day, he would call for help even when there was no danger. The villagers came running but found no wolf. One day, when a real wolf appeared, the shepherd called for help, but no one believed him. This story teaches us that honesty is the best policy and that we should always tell the truth.',
       status: 'published'
     },
     {
@@ -92,37 +92,37 @@ if Story.none?
     {
       title: 'The Generous Merchant',
       summary: 'Learn about generosity and sharing with others through the example of a kind-hearted merchant.',
-      content: "A wealthy merchant used to help the poor and needy in his town. He would give food, clothing, and shelter to those in need without expecting anything in return. His generosity spread throughout the land, and people learned that giving brings more happiness than receiving.",
+      content: 'A wealthy merchant used to help the poor and needy in his town. He would give food, clothing, and shelter to those in need without expecting anything in return. His generosity spread throughout the land, and people learned that giving brings more happiness than receiving.',
       status: 'published'
     },
     {
       title: 'The Night Journey',
       summary: 'Discover the miraculous journey of Prophet Muhammad (PBUH) from Makkah to Jerusalem and then to the heavens.',
-      content: "One night, Prophet Muhammad (PBUH) was taken on an incredible journey known as Al-Isra wal-Miraj. He traveled from Makkah to Jerusalem on a special mount called Buraq, and then ascended through the seven heavens to meet Allah. This journey shows us the special status of Prophet Muhammad (PBUH) and the importance of prayer in Islam.",
+      content: 'One night, Prophet Muhammad (PBUH) was taken on an incredible journey known as Al-Isra wal-Miraj. He traveled from Makkah to Jerusalem on a special mount called Buraq, and then ascended through the seven heavens to meet Allah. This journey shows us the special status of Prophet Muhammad (PBUH) and the importance of prayer in Islam.',
       status: 'published'
     },
     {
       title: 'The First Mosque',
       summary: 'The story of how the first mosque was built in Islam, teaching children about the importance of places of worship.',
-      content: "When Prophet Muhammad (PBUH) migrated to Madinah, one of the first things he did was help build a mosque. All the Muslims worked together—some carried stones, some carried bricks, and everyone helped. This story teaches us about unity, cooperation, and the importance of having a place to pray and learn about Islam together.",
+      content: 'When Prophet Muhammad (PBUH) migrated to Madinah, one of the first things he did was help build a mosque. All the Muslims worked together—some carried stones, some carried bricks, and everyone helped. This story teaches us about unity, cooperation, and the importance of having a place to pray and learn about Islam together.',
       status: 'published'
     },
     {
       title: 'The Kindness of a Sahabah',
       summary: 'A heartwarming story about the companions of the Prophet and their acts of kindness.',
-      content: "The companions of Prophet Muhammad (PBUH) were known for their kindness and good character. This story follows one of them as he helps an elderly neighbor, feeds the hungry, and shows compassion to everyone he meets. Their example inspires us to be better people every day.",
+      content: 'The companions of Prophet Muhammad (PBUH) were known for their kindness and good character. This story follows one of them as he helps an elderly neighbor, feeds the hungry, and shows compassion to everyone he meets. Their example inspires us to be better people every day.',
       status: 'published'
     },
     {
       title: 'Ramadan in Old Times',
       summary: 'Experience how Muslims celebrated Ramadan in the past and learn about traditions that continue today.',
-      content: "Long ago, Muslims would prepare for Ramadan weeks in advance. They would make special foods, clean their homes, and gather with family. During Ramadan, the whole community would come together for iftar and tarawih prayers. This story helps children understand the beauty and community spirit of Ramadan.",
+      content: 'Long ago, Muslims would prepare for Ramadan weeks in advance. They would make special foods, clean their homes, and gather with family. During Ramadan, the whole community would come together for iftar and tarawih prayers. This story helps children understand the beauty and community spirit of Ramadan.',
       status: 'published'
     },
     {
       title: 'The Quest for Knowledge',
       summary: 'An inspiring story about the importance of seeking knowledge in Islam.',
-      content: "A young student travels far and wide to learn from the greatest scholars of his time. He faces many challenges but never gives up. This story teaches children that seeking knowledge is an important part of being a good Muslim and that learning is a lifelong journey.",
+      content: 'A young student travels far and wide to learn from the greatest scholars of his time. He faces many challenges but never gives up. This story teaches children that seeking knowledge is an important part of being a good Muslim and that learning is a lifelong journey.',
       status: 'draft'
     },
     {
@@ -134,7 +134,7 @@ if Story.none?
     {
       title: 'The Story of Creation',
       summary: 'A gentle introduction to how Allah created the world, suitable for young children.',
-      content: "This story tells how Allah created everything—the sky, the earth, the sun, the moon, the stars, the animals, and finally, human beings. It emphasizes that Allah created everything with purpose and wisdom, and that we should appreciate and take care of His creation.",
+      content: 'This story tells how Allah created everything—the sky, the earth, the sun, the moon, the stars, the animals, and finally, human beings. It emphasizes that Allah created everything with purpose and wisdom, and that we should appreciate and take care of His creation.',
       status: 'archived'
     }
   ]
@@ -248,7 +248,7 @@ if Printable.none?
     }
   ]
 
-  printable_data.each do |data| # rubocop:disable Metrics/BlockLength
+  printable_data.each do |data|
     # Create printable without validation first (files need to be attached after creation)
     printable = Printable.new(
       title: data[:title],
@@ -270,4 +270,127 @@ if Printable.none?
   end
 
   Rails.logger.debug { "Created #{Printable.count} printables" }
+end
+
+# Create sample games
+if Game.none?
+  Rails.logger.debug 'Creating sample games...'
+
+  game_data = [
+    {
+      title: 'Arabic Alphabet Match',
+      description: 'Match Arabic letters with their sounds and names. Great for beginners!',
+      game_url: 'https://wordwall.net/resource/12345678/arabic-alphabet',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Prophet Names Quiz',
+      description: 'Test knowledge of Prophet names from the Quran. Multiple choice for all ages.',
+      game_url: 'https://wordwall.net/resource/12345679/prophet-names',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Daily Duas Flashcards',
+      description: 'Learn important daily duas with interactive flashcards. Audio included for proper pronunciation.',
+      game_url: 'https://wordwall.net/resource/12345680/daily-duas',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Pillars of Islam Match',
+      description: 'Match the Five Pillars of Islam with their descriptions and meanings.',
+      game_url: 'https://wordwall.net/resource/12345681/pillars-islam',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Prayer Positions Game',
+      description: 'Learn the positions of Salah (prayer) through an interactive sequencing game.',
+      game_url: 'https://wordwall.net/resource/12345682/prayer-positions',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Quranic Animals Quiz',
+      description: 'Discover the different animals mentioned in the Quran through fun quiz questions.',
+      game_url: 'https://wordwall.net/resource/12345683/quranic-animals',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Ramadan Vocabulary Hunt',
+      description: 'Word search game with important Ramadan-related vocabulary and terms.',
+      game_url: 'https://wordwall.net/resource/12345684/ramadan-words',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Islamic Months Memory Game',
+      description: 'Memory card game to learn the names of the twelve Islamic months.',
+      game_url: 'https://wordwall.net/resource/12345685/islamic-months',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Prophet Stories Sequencing',
+      description: 'Put the events of Prophet Yusuf\'s story in the correct order. Beautiful illustrations included!',
+      game_url: 'https://wordwall.net/resource/12345686/prophet-yusuf',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: '99 Names of Allah Quiz',
+      description: 'Advanced quiz covering the beautiful names of Allah (Asma ul Husna). Perfect for older kids!',
+      game_url: 'https://wordwall.net/resource/12345687/names-of-allah',
+      source_attribution: 'Wordwall',
+      status: 'published'
+    },
+    {
+      title: 'Hajj Journey Game',
+      description: 'Interactive map-based game to learn about the rites and places of Hajj.',
+      game_url: 'https://wordwall.net/resource/12345688/hajj-journey',
+      source_attribution: 'Wordwall',
+      status: 'draft'
+    },
+    {
+      title: 'Islamic Calendar Puzzle',
+      description: 'Put together the Islamic lunar calendar and learn about special days in each month.',
+      game_url: 'https://wordwall.net/resource/12345689/calendar-puzzle',
+      source_attribution: 'Wordwall',
+      status: 'archived'
+    }
+  ]
+
+  game_data.each do |data|
+    # Create game without validation first (thumbnail needs to be attached after)
+    game = Game.new(
+      title: data[:title],
+      description: data[:description],
+      game_url: data[:game_url],
+      source_attribution: data[:source_attribution],
+      status: data[:status]
+    )
+
+    # Save without validation to get an ID for file attachments
+    game.save!(validate: false)
+
+    # Attach dummy thumbnail image
+    png_content = "\x89PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01" \
+                  "\b\x02\x00\x00\x00\x90wS\xDE\x00\x00\x00\fIDATx\x9Cc\x00\x01\x00\x00" \
+                  "\x05\x00\x01\r\n-\xB4\x00\x00\x00\x00IEND\xAEB`\x82"
+    game.thumbnail_image.attach(
+      io: StringIO.new(png_content),
+      filename: "#{data[:title].parameterize}-thumbnail.png",
+      content_type: 'image/png'
+    )
+
+    # Now save with validation to ensure everything is correct
+    game.save!
+
+    Rails.logger.debug { "  Created game: #{game.title}" }
+  end
+
+  Rails.logger.debug { "Created #{Game.count} games" }
 end

@@ -6,6 +6,8 @@ module ApplicationHelper
     case color_scheme
     when :violet
       'bg-violet-400 text-violet-900'
+    when :indigo
+      'bg-indigo-400 text-indigo-900'
     else
       'bg-emerald-400 text-emerald-900'
     end
@@ -18,6 +20,8 @@ module ApplicationHelper
     case color_scheme
     when :violet
       'bg-violet-100 text-violet-800 ring-1 ring-violet-600'
+    when :indigo
+      'bg-indigo-100 text-indigo-800 ring-1 ring-indigo-600'
     else
       'bg-emerald-100 text-emerald-800 ring-1 ring-emerald-600'
     end

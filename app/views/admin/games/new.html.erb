@@ -1,0 +1,10 @@
+<div class="max-w-3xl mx-auto py-8 px-4">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">New Game</h1>
+
+  <%= render 'form', game: @game %>
+
+  <div class="mt-4">
+    <%= link_to '← Back to Games', admin_games_path, class: 'text-gray-600 hover:text-gray-800 font-medium' %>
+  </div>
+</div>
+
