@@ -26,17 +26,21 @@ module Admin
       end
     end
 
+    # rubocop:disable Metrics/MethodLength
     def update
       @printable = Printable.find(params[:id])
       attachments_to_remove = collect_attachments_to_remove
-
       if @printable.update(printable_params)
+        @purge_failed = false
         purge_attachments_safely(attachments_to_remove)
-        redirect_to admin_printable_path(@printable), notice: 'Printable was successfully updated.'
+        notice = 'Printable was successfully updated.'
+        notice += ' However, some attachments could not be removed.' if @purge_failed
+        redirect_to admin_printable_path(@printable), notice: notice
       else
         render :edit, status: :unprocessable_entity
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     def destroy
       @printable = Printable.find(params[:id])
@@ -56,9 +60,12 @@ module Admin
 
     def purge_attachments_safely(attachment_names)
       purge_attachments(attachment_names)
-    rescue StandardError => e
-      Rails.logger.error("Failed to purge attachments: #{e.message}")
-      # Optionally flash a warning to the user
+    rescue ActiveStorage::Error => e
+      @purge_failed = true
+      attachment_list = attachment_names.join(', ')
+      Rails.logger.error("Failed to purge attachments for Printable #{@printable&.id}: " \
+                         "#{e.message} (attachments: #{attachment_list})")
+      flash.now[:warning] = 'Some attachments could not be removed from storage.'
     end
 
     def purge_attachments(attachment_names)
