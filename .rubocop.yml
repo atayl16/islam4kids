@@ -45,6 +45,23 @@ Metrics/BlockLength:
     - 'config/environments/*'
     - 'config/routes.rb'
 
+# Allow longer examples in RSpec tests (some tests need more setup/assertions)
+RSpec/ExampleLength:
+  Enabled: false
+
+# Allow multiple expectations in RSpec tests (some tests check multiple related things)
+RSpec/MultipleExpectations:
+  Enabled: false
+
+# Allow repeated example structure (different test scenarios can have similar setup)
+RSpec/RepeatedExample:
+  Enabled: false
+
 # Don't enforce I18n for all user-facing text (app-dependent)
 Rails/I18nLocaleTexts:
   Enabled: false
+
+# Allow has_* prefix for predicate methods (has_main_file? conflicts with main_file method)
+Naming/PredicatePrefix:
+  Exclude:
+    - 'app/models/printable.rb'

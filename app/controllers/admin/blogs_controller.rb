@@ -20,18 +20,18 @@ module Admin
     def create
       @blog = Blog.new(blog_params)
       if @blog.save
-        redirect_to admin_blog_path(@blog)
+        redirect_to admin_blog_path(@blog), notice: 'Blog was successfully created.'
       else
-        render :new
+        render :new, status: :unprocessable_entity
       end
     end
 
     def update
       @blog = Blog.find(params[:id])
       if @blog.update(blog_params)
-        redirect_to admin_blog_path(@blog)
+        redirect_to admin_blog_path(@blog), notice: 'Blog was successfully updated.'
       else
-        render :edit
+        render :edit, status: :unprocessable_entity
       end
     end
 

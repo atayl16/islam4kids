@@ -14,7 +14,7 @@ class Story < ApplicationRecord
               message: 'must be a PNG, JPG, GIF, or WebP image'
             },
             size: {
-              less_than: 5.megabytes,
-              message: 'must be less than 5MB'
+              less_than: 10.megabytes,
+              message: 'must be less than 10MB'
             }
 end

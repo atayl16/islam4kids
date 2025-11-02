@@ -30,36 +30,105 @@
     </div>
 
     <div class="field">
-      <%= form.label :thumbnail_image, "Thumbnail Image (PNG, JPG, GIF, WebP - max 1MB)", class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <%= form.label :thumbnail_image, "Thumbnail Image (optional - will use image_file if left blank)", class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <p class="text-xs text-gray-500 mb-2">
+        For single-page printables, you can skip this and use the same image_file for both the printable and thumbnail to save storage.
+      </p>
       <%= form.file_field :thumbnail_image, accept: 'image/png,image/jpeg,image/gif,image/webp', class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent' %>
-      <% if @printable.thumbnail_image.attached? %>
-        <div class="mt-2">
-          <%= image_tag @printable.thumbnail_image, class: 'h-32 w-32 object-cover rounded-lg shadow-sm' %>
-        </div>
+      <% if @printable.persisted? %>
+        <% if @printable.thumbnail_image.attached? %>
+          <% begin %>
+            <div class="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+              <div class="flex items-start space-x-3">
+                <%= image_tag @printable.thumbnail_image, class: 'h-32 w-32 object-cover rounded-lg shadow-sm flex-shrink-0' %>
+                <div class="flex-1">
+                  <p class="text-xs text-gray-500 mb-2">Current thumbnail:</p>
+                  <p class="text-sm font-medium text-gray-700 mb-1"><%= @printable.thumbnail_image.filename %></p>
+                  <label class="flex items-center space-x-2 text-sm text-red-600 cursor-pointer hover:text-red-700">
+                    <%= check_box_tag 'printable[remove_thumbnail_image]', '1', false, class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded' %>
+                    <span>Remove thumbnail image</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          <% rescue ArgumentError => e %>
+            <!-- Image attachment is not yet persisted -->
+          <% end %>
+        <% elsif @printable.image_file.attached? %>
+          <div class="mt-2 text-xs text-gray-500 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <p class="mb-2">Currently using image_file as thumbnail (no separate thumbnail uploaded)</p>
+            <% begin %>
+              <%= image_tag @printable.image_file, class: 'h-32 w-32 object-cover rounded-lg shadow-sm' %>
+            <% rescue ArgumentError => e %>
+              <!-- Image attachment is not yet persisted -->
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
 
     <div class="field">
-      <%= form.label :pdf_file, "PDF File (max 10MB)", class: 'block text-sm font-medium text-gray-700 mb-2' %>
-      <%= form.file_field :pdf_file, accept: 'application/pdf', class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent' %>
-      <% if @printable.pdf_file.attached? %>
-        <div class="mt-2 text-sm text-gray-600">
-          Current file: <%= @printable.pdf_file.filename %>
-        </div>
-      <% end %>
-    </div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Main File (choose one)
+      </label>
+      
+      <!-- PDF File Upload -->
+      <div class="mb-4">
+        <%= form.label :pdf_file, "PDF File (for multi-page printables, max 15MB)", class: 'block text-sm font-medium text-gray-700 mb-2' %>
+        <%= form.file_field :pdf_file, accept: 'application/pdf', class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent' %>
+        <% if @printable.persisted? && @printable.pdf_file.attached? %>
+          <div class="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-gray-700"><%= @printable.pdf_file.filename %></p>
+                <p class="text-xs text-gray-500"><%= number_to_human_size(@printable.pdf_file.byte_size) %></p>
+              </div>
+              <label class="flex items-center space-x-2 text-sm text-red-600 cursor-pointer hover:text-red-700">
+                <%= check_box_tag 'printable[remove_pdf_file]', '1', false, class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded' %>
+                <span>Remove</span>
+              </label>
+            </div>
+          </div>
+        <% end %>
+      </div>
 
-    <div class="field">
-      <%= form.label :published, class: 'flex items-center space-x-2 text-sm font-medium text-gray-700' %>
-      <div class="flex items-center">
-        <%= form.check_box :published, class: 'h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded' %>
-        <span class="ml-2 text-sm text-gray-600">Publish this printable (make it visible to the public)</span>
+      <!-- Divider -->
+      <div class="flex items-center my-4">
+        <div class="flex-1 border-t border-gray-300"></div>
+        <span class="px-4 text-sm text-gray-500">OR</span>
+        <div class="flex-1 border-t border-gray-300"></div>
+      </div>
+
+      <!-- Image File Upload -->
+      <div>
+        <%= form.label :image_file, "Image File (for single-page printables, max 10MB)", class: 'block text-sm font-medium text-gray-700 mb-2' %>
+        <%= form.file_field :image_file, accept: 'image/png,image/jpeg,image/gif,image/webp', class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent' %>
+        <% if @printable.persisted? && @printable.image_file.attached? %>
+          <div class="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+            <div class="flex items-start space-x-3">
+              <% begin %>
+                <%= image_tag @printable.image_file, class: 'h-32 w-32 object-cover rounded-lg shadow-sm flex-shrink-0' %>
+              <% rescue ArgumentError => e %>
+                <!-- Image attachment is not yet persisted -->
+              <% end %>
+              <div class="flex-1">
+                <p class="text-sm font-medium text-gray-700 mb-1"><%= @printable.image_file.filename %></p>
+                <p class="text-xs text-gray-500 mb-2"><%= number_to_human_size(@printable.image_file.byte_size) %></p>
+                <label class="flex items-center space-x-2 text-sm text-red-600 cursor-pointer hover:text-red-700">
+                  <%= check_box_tag 'printable[remove_image_file]', '1', false, class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded' %>
+                  <span>Remove image file</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
 
     <div class="field">
-      <%= form.label :published_at, class: 'block text-sm font-medium text-gray-700 mb-2' %>
-      <%= form.datetime_local_field :published_at, class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent' %>
+      <%= form.label :status, class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <%= form.select :status, options_for_select(Printable.statuses.keys.map { |status| [status.humanize, status] }, @printable.status), 
+                      {}, class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent' %>
     </div>
 
     <div class="actions">

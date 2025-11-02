@@ -19,8 +19,8 @@
         <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-emerald-400 transform hover:-translate-y-2">
           <!-- Thumbnail -->
           <div class="relative h-64 bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
-            <% if printable.thumbnail_image.attached? %>
-              <%= image_tag printable.thumbnail_image, class: 'w-full h-full object-cover group-hover:scale-110 transition-transform duration-300', alt: printable.title %>
+            <% if printable.display_thumbnail %>
+              <%= image_tag printable.display_thumbnail, class: 'w-full h-full object-cover group-hover:scale-110 transition-transform duration-300', alt: printable.title %>
             <% else %>
               <div class="flex items-center justify-center h-full">
                 <svg class="w-24 h-24 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

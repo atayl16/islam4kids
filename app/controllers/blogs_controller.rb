@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   def index
     @blogs = Rails.cache.fetch('blogs/published-collection', expires_in: 12.hours) do
-      Blog.published.order(created_at: :desc).to_a
+      Blog.published.order(created_at: :desc)
     end
   end
 

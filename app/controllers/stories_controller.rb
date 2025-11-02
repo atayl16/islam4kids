@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
   def index
     @stories = Rails.cache.fetch('stories/published-collection', expires_in: 12.hours) do
-      Story.published.order(created_at: :desc).to_a
+      Story.published.order(created_at: :desc)
     end
   end
 

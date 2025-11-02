@@ -6,7 +6,6 @@ FactoryBot.define do
     end
     printable_type { :worksheet }
     status { 'published' }
-    published_at { Time.current }
 
     # Attach files after build (for validations on unsaved records)
     after(:build) do |printable|
@@ -73,7 +72,6 @@ FactoryBot.define do
 
     trait :draft do
       status { 'draft' }
-      published_at { nil }
     end
   end
 end
