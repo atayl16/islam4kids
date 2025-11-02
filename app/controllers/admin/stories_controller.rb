@@ -22,7 +22,7 @@ module Admin
       if @story.save
         redirect_to admin_story_path(@story), notice: 'Story was successfully created.'
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       end
     end
 
@@ -31,7 +31,7 @@ module Admin
       if @story.update(story_params)
         redirect_to admin_story_path(@story), notice: 'Story was successfully updated.'
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

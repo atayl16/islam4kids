@@ -22,7 +22,7 @@ module Admin
       if @printable.save
         redirect_to admin_printable_path(@printable), notice: 'Printable was successfully created.'
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       end
     end
 
@@ -37,7 +37,7 @@ module Admin
         notice += ' However, some attachments could not be removed.' if @purge_failed
         redirect_to admin_printable_path(@printable), notice: notice
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
     # rubocop:enable Metrics/MethodLength

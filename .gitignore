@@ -89,4 +89,4 @@ reports/
 TASKS.md
 
 # Ignore import docs
-docs/*
+docs/*coverage
