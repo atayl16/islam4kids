@@ -6,7 +6,20 @@ default: test
 
 # Setup project dependencies and database
 setup:
+  docker-compose up -d
   bin/setup
+
+# Start Docker services (PostgreSQL and Redis)
+docker-up:
+  docker-compose up -d
+
+# Stop Docker services
+docker-down:
+  docker-compose down
+
+# View Docker services status
+docker-status:
+  docker-compose ps
 
 # Run RuboCop linter
 lint:

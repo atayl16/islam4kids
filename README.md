@@ -35,28 +35,33 @@ A Rails 8 content management platform for Islamic educational content - replacin
 ## Prerequisites
 
 - Ruby 3.3 or higher
-- PostgreSQL
-- Redis
+- Docker and Docker Compose (for PostgreSQL and Redis)
 - Node.js (for JavaScript dependencies)
+
+**Note:** This project uses Docker Compose to run PostgreSQL and Redis locally. No need to install them separately!
 
 ## Setup
 
-1. Clone the repository and install dependencies:
+1. **Start Docker services** (PostgreSQL and Redis):
+```bash
+docker-compose up -d
+```
+
+2. **Clone the repository and install dependencies**:
 ```bash
 bundle install
 ```
 
-2. Set up environment variables (create `.env` file):
-```bash
-REDIS_URL=redis://localhost:6379/0
-DATABASE_URL=postgresql://localhost/islam4kids_development
-```
-
-3. Set up the database:
+3. **Set up the database**:
 ```bash
 bin/rails db:create
 bin/rails db:migrate
 bin/rails db:seed
+```
+
+Or run the automated setup:
+```bash
+bin/setup
 ```
 
 4. Install and configure git hooks:
