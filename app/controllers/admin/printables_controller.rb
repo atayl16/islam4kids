@@ -76,8 +76,8 @@ module Admin
     end
 
     def printable_params
-      params.expect(printable: %i[title description printable_type status pdf_file image_file
-                                  thumbnail_image])
+      params.require(:printable).permit(:title, :description, :printable_type, :status, :pdf_file, :image_file,
+                                        :thumbnail_image)
     end
   end
 end

@@ -65,3 +65,7 @@ Rails/I18nLocaleTexts:
 Naming/PredicatePrefix:
   Exclude:
     - 'app/models/printable.rb'
+
+# Don't enforce Rails 8 params.expect syntax (we prefer the traditional require/permit pattern)
+Rails/StrongParametersExpect:
+  Enabled: false

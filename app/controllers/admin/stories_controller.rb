@@ -38,13 +38,13 @@ module Admin
     def destroy
       @story = Story.find(params[:id])
       @story.destroy
-      redirect_to admin_stories_path
+      redirect_to admin_stories_path, notice: 'Story was successfully deleted.'
     end
 
     private
 
     def story_params
-      params.expect(story: %i[title summary content status header_image])
+      params.require(:story).permit(:title, :summary, :content, :status, :header_image)
     end
   end
 end

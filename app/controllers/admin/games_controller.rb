@@ -44,7 +44,7 @@ module Admin
     private
 
     def game_params
-      params.expect(game: %i[title description game_url source_attribution status thumbnail_image])
+      params.require(:game).permit(:title, :description, :game_url, :source_attribution, :status, :thumbnail_image)
     end
   end
 end

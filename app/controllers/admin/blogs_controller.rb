@@ -38,13 +38,13 @@ module Admin
     def destroy
       @blog = Blog.find(params[:id])
       @blog.destroy
-      redirect_to admin_blogs_path
+      redirect_to admin_blogs_path, notice: 'Blog was successfully deleted.'
     end
 
     private
 
     def blog_params
-      params.expect(blog: %i[title content status header_image])
+      params.require(:blog).permit(:title, :content, :status, :header_image)
     end
   end
 end
