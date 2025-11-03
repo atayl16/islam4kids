@@ -90,3 +90,4 @@ TASKS.md
 
 # Ignore import docs
 docs/*coverage
+db/backups/*.dump

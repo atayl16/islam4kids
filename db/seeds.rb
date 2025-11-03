@@ -9,19 +9,23 @@
 #   end
 
 # Create admin user
-User.find_or_create_by!(email: 'admin@islam4kids.org') do |user|
-  user.password = 'admin123456' # Change this in production!
-  user.is_admin = true
-end
+# Skip in test environment - users should be created via factories in tests
+unless Rails.env.test?
+  User.find_or_create_by!(email: 'admin@islam4kids.org') do |user|
+    user.password = 'admin123456' # Change this in production!
+    user.is_admin = true
+  end
 
-# Create regular user
-User.find_or_create_by!(email: 'user@islam4kids.org') do |user|
-  user.password = 'user123456' # Change this in production!
-  user.is_admin = false
+  # Create regular user
+  User.find_or_create_by!(email: 'user@islam4kids.org') do |user|
+    user.password = 'user123456' # Change this in production!
+    user.is_admin = false
+  end
 end
 
 # Create sample blogs with Faker
-if Blog.none?
+# Skip sample data in test environment to avoid polluting test database
+if Blog.none? && !Rails.env.test?
   Rails.logger.debug 'Creating sample blogs...'
 
   # Create published blogs
@@ -55,7 +59,8 @@ if Blog.none?
 end
 
 # Create sample stories with realistic Islamic content
-if Story.none?
+# Skip sample data in test environment
+if Story.none? && !Rails.env.test?
   Rails.logger.debug 'Creating sample stories...'
 
   story_data = [
@@ -177,7 +182,8 @@ def attach_printable_files(printable, title)
 end
 
 # Create sample printables
-if Printable.none?
+# Skip sample data in test environment
+if Printable.none? && !Rails.env.test?
   Rails.logger.debug 'Creating sample printables...'
 
   printable_data = [
@@ -273,7 +279,8 @@ if Printable.none?
 end
 
 # Create sample games
-if Game.none?
+# Skip sample data in test environment
+if Game.none? && !Rails.env.test?
   Rails.logger.debug 'Creating sample games...'
 
   game_data = [
