@@ -72,8 +72,8 @@
         <% @printables.each do |printable| %>
           <tr class="hover:bg-emerald-50 transition-colors duration-150">
             <td class="px-6 py-5">
-              <% if printable.thumbnail_image.attached? %>
-                <%= image_tag printable.thumbnail_image, class: 'h-16 w-16 object-cover rounded-lg shadow-sm', alt: printable.title %>
+              <% if printable.display_thumbnail %>
+                <%= image_tag printable.display_thumbnail, class: 'h-16 w-16 object-cover rounded-lg shadow-sm', alt: printable.title %>
               <% else %>
                 <div class="h-16 w-16 bg-gray-200 rounded-lg flex items-center justify-center">
                   <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
