@@ -85,8 +85,9 @@ pickle-email-*.html
 # Ignore security scan reports
 reports/
 
-# Ignore tasks file
+# Ignore planning files
 TASKS.md
+NOTES.md
 
 # Ignore import docs
 docs/*coverage
