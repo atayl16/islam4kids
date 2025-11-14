@@ -82,6 +82,11 @@ pickle-email-*.html
 .cursorrules
 .cursorignore
 
+# Beads issue tracking (exclude DB, keep JSONL for git)
+.beads/.db
+.beads/.db-*
+.beads/logs/
+
 # Ignore security scan reports
 reports/
 
