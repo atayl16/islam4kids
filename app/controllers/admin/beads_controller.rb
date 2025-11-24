@@ -9,10 +9,10 @@ module Admin
 
       # Get unique labels for filter dropdown
       all_issues = BeadsService.all_issues
-      @all_labels = all_issues.flat_map { |i| i["labels"] || [] }.uniq.sort
+      @all_labels = all_issues.flat_map { |i| i['labels'] || [] }.uniq.sort
 
       # Get unique statuses
-      @all_statuses = all_issues.map { |i| i["status"] }.uniq.sort
+      @all_statuses = all_issues.pluck('status').uniq.sort
     end
 
     def show
@@ -52,7 +52,8 @@ module Admin
 
     def group_issues(issues)
       return {} if issues.blank?
-      issues.group_by { |i| i["priority"] || 4 }.sort.to_h
+
+      issues.group_by { |i| i['priority'] || 4 }.sort.to_h
     end
 
     def filter_params
