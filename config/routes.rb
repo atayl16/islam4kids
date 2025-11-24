@@ -25,5 +25,6 @@ Rails.application.routes.draw do
     resources :stories
     resources :printables
     resources :games
+    resources :beads, only: [:index, :show]
   end
 end

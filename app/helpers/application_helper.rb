@@ -26,4 +26,46 @@ module ApplicationHelper
       'bg-emerald-100 text-emerald-800 ring-1 ring-emerald-600'
     end
   end
+
+  # Beads issue tracker helpers
+  def priority_badge_color(priority)
+    case priority.to_i
+    when 0 then 'bg-red-600'
+    when 1 then 'bg-orange-500'
+    when 2 then 'bg-blue-500'
+    when 3 then 'bg-green-500'
+    else 'bg-gray-500'
+    end
+  end
+
+  def priority_label(priority)
+    case priority.to_i
+    when 0 then 'Critical'
+    when 1 then 'High'
+    when 2 then 'Normal'
+    when 3 then 'Low'
+    else 'Very Low'
+    end
+  end
+
+  def status_badge_color(status)
+    case status.to_s
+    when 'open' then 'bg-blue-100 text-blue-800'
+    when 'in_progress' then 'bg-yellow-100 text-yellow-800'
+    when 'closed' then 'bg-green-100 text-green-800'
+    when 'blocked' then 'bg-red-100 text-red-800'
+    else 'bg-gray-100 text-gray-800'
+    end
+  end
+
+  def type_badge_color(type)
+    case type.to_s
+    when 'epic' then 'bg-purple-100 text-purple-800'
+    when 'feature' then 'bg-blue-100 text-blue-800'
+    when 'bug' then 'bg-red-100 text-red-800'
+    when 'task' then 'bg-gray-100 text-gray-800'
+    when 'chore' then 'bg-yellow-100 text-yellow-800'
+    else 'bg-gray-100 text-gray-800'
+    end
+  end
 end
