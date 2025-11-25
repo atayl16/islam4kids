@@ -369,97 +369,154 @@ end
 
 # Create sample videos
 # Skip sample data in test environment
+
 if Video.none? && !Rails.env.test?
   Rails.logger.debug 'Creating sample videos...'
 
   video_data = [
     {
-      title: 'The Story of Prophet Adam (AS) - Animated',
-      description: 'Learn about the creation of Prophet Adam (AS), the first human and prophet. This animated story teaches children about the beginning of humanity and the importance of following Allah.',
-      video_url: 'https://youtu.be/WZk197Rf5LQ',
+      title: "WHAT is the QURAN? | The Story of the Quran and it's IMPORTANCE for Kids | Islamic Kids National",
+      description: "A video about the Quran and its importance for kids.",
+      video_url: "https://youtu.be/tr7aZowQxUc",
       featured: true,
-      position: 0,
-      status: 'published'
-    },
-    {
-      title: 'Learning Wudu (Ablution) for Kids',
-      description: 'Step-by-step guide teaching children how to perform wudu properly before prayer. Perfect for beginners with clear instructions and demonstrations.',
-      video_url: 'https://youtu.be/dQw4w9WgXcQ',
-      featured: false,
       position: 1,
       status: 'published'
     },
     {
-      title: 'The Five Pillars of Islam Explained',
-      description: 'An engaging video that explains the Five Pillars of Islam in a way that children can easily understand. Includes beautiful animations and simple explanations.',
-      video_url: 'https://youtu.be/3JZ_D3ELwOQ',
-      featured: false,
+      title: "Nasheed - Prophet Yunus (Jonah) Song for Children with Zaky",
+      description: "A video about the Prophet Yunus (Jonah) song for children.",
+      video_url: "https://youtu.be/CSoCd1Q-z_8",
+      featured: true,
       position: 2,
       status: 'published'
     },
     {
-      title: 'Prophet Muhammad (PBUH) - The Last Messenger',
-      description: 'Discover the life story of Prophet Muhammad (PBUH), the last messenger of Allah. Learn about his character, teachings, and example for all humanity.',
-      video_url: 'https://youtu.be/kJQP7kiw5Fk',
-      featured: false,
+      title: "The Story of Prophet Yunus (as) With Zaky - Muslim Cartoon",
+      description: "A video about the Prophet Yunus (as) story with Zaky.",
+      video_url: "https://youtu.be/c2I-MdrBkUY",
+      featured: true,
       position: 3,
       status: 'published'
     },
     {
-      title: 'Beautiful Quran Recitation for Children',
-      description: 'Soothing Quran recitation of short surahs commonly memorized by children. Helps with pronunciation and memorization.',
-      video_url: 'https://youtu.be/L_jWHffIx5E',
-      featured: false,
+      title: "Why Do We Fast in Ramadan?: Ramadan Lessons | Islamic Cartoon | IQRA Cartoon",
+      description: "A video about the importance of fasting in Ramadan.",
+      video_url: "https://youtu.be/s1t4180kKk4",
+      featured: true,
       position: 4,
       status: 'published'
     },
     {
-      title: 'How to Pray Salah - Kids Tutorial',
-      description: 'Complete guide to performing the five daily prayers. Shows each position and recitation clearly for young learners.',
-      video_url: 'https://youtu.be/oHg5SJYRHA0',
-      featured: false,
+      title: "Creative Kids: My First Fast",
+      description: "A video about the first fast of a child.",
+      video_url: "https://youtu.be/ykC1xvPSmTY",
+      featured: true,
       position: 5,
       status: 'published'
     },
     {
-      title: 'Ramadan Explained for Children',
-      description: 'What is Ramadan? Why do Muslims fast? This video answers these questions and more, helping children understand the blessed month.',
-      video_url: 'https://youtu.be/9bZkp7q19f0',
-      featured: false,
+      title: "What Is Zakat? (ep13) - Ramadan Reminders With Zaky 🌙",
+      description: "A video about the importance of Zakat in Ramadan.",
+      video_url: "https://youtu.be/-gnKsPyp8TQ",
+      featured: true,
       position: 6,
       status: 'published'
-    },
+    }, 
     {
-      title: 'The Story of Prophet Musa (AS) - Part 1',
-      description: 'The amazing story of Prophet Musa (AS) and his encounter with Pharaoh. Learn about courage, faith, and trusting in Allah.',
-      video_url: 'https://youtu.be/2Vv-BfVoq4g',
-      featured: false,
+      title: "LEARN the 5 Pillars of ISLAM with ZAKY",
+      description: "A video about the 5 Pillars of Islam.",
+      video_url: "https://youtu.be/mWJ-tlZdtK4",
+      featured: true,
       position: 7,
       status: 'published'
     },
     {
-      title: 'Islamic Manners and Etiquette for Kids',
-      description: 'Teaching children the beautiful manners taught by Islam including kindness, respect, honesty, and good character.',
-      video_url: 'https://youtu.be/pAyKJAtDNCw',
-      featured: false,
+      title: "Saying the Shahadah! Learning with ZAKY",
+      description: "A video about the Shahadah.",
+      video_url: "https://youtu.be/t2OepFfxZVI",
+      featured: true,
       position: 8,
       status: 'published'
     },
     {
-      title: 'The Angels in Islam - Who are They?',
-      description: 'Introduction to the angels in Islam, their roles, and why belief in angels is an important part of our faith.',
-      video_url: 'https://youtu.be/fJ9rUzIMcZQ',
-      featured: false,
+      title: "5 Pillars of Islam - part 1&2 | Cartoon by Discover Islam UK",
+      description: "A video about the 5 Pillars of Islam.",
+      video_url: "https://youtu.be/H80ecWSbu9E",
+      featured: true,
       position: 9,
-      status: 'draft'
+      status: 'published'
     },
     {
-      title: 'Stories from the Quran - Prophet Sulaiman and the Ants',
-      description: 'The fascinating story of Prophet Sulaiman (AS) and how he understood the language of animals. A lesson in humility and respect for all creatures.',
-      video_url: 'https://youtu.be/GtL1huin9EE',
-      featured: false,
+      title: "What is Hajj? | Hajj for Kids | Zill Noorain #hajj2023 #kidslearning #Islam",
+      description: "A video about the Hajj.",
+      video_url: "https://youtu.be/E0flOw0xxBY",
+      featured: true,
       position: 10,
-      status: 'archived'
+      status: 'published'
+    },
+    {
+      title: "How to pray 3 Rakat (units) - Step by Step Guide | From Time to Pray with Zaky",
+      description: "A video about the how to pray 3 Rakat (units).",
+      video_url: "https://youtu.be/dp3Cj0fLBOE",
+      featured: true,
+      position: 11,
+      status: 'published'
+    },
+    {
+      title: "How to pray 2 Rakat (units) - Step by Step Guide | From Time to Pray with Zaky",
+      description: "A video about the how to pray 2 Rakat (units).",
+      video_url: "https://youtu.be/WZk197Rf5LQ",
+      featured: true,
+      position: 12,
+      status: 'published'
+    },
+    {
+      title: "How to pray 4 Rakat (units) - Step by Step Guide | From Time to Pray with Zaky",
+      description: "A video about the how to pray 4 Rakat (units).",
+      video_url: "https://youtu.be/f6iR5elhDdk",
+      featured: true,
+      position: 13,
+      status: 'published'
+    },
+    {
+      title: "TIME TO PRAY WITH ZAKY - FULL MOVIE FOR KIDS",
+      description: "A video about the time to pray with Zaky.",
+      video_url: "https://youtu.be/i0eSf7oYsXE",
+      featured: true,
+      position: 14,
+      status: 'published'
+    },
+    {
+      title: "Creative Kids: I Hit My Sister",
+      description: "A video about the creative kids: I hit my sister.",
+      video_url: "https://youtu.be/4Di9e1Q4bgQ",
+      featured: false,
+      position: 15,
+      status: 'published'
+    },
+    {
+      title: "Creative Kids: Michael and the Ants",
+      description: "A video about the creative kids: Michael and the ants.",
+      video_url: "https://youtu.be/UcpFglJAKQo",
+      featured: false,
+      position: 16,
+      status: 'published'
+    },
+    {
+      title: "Creative Kids Season 2 Gashee",
+      description: "A video about the creative kids season 2 gashee.",
+      video_url: "https://youtu.be/KweoVxaVxc0",
+      featured: false,
+      position: 17,
+      status: 'published'
+    },
+    {
+      title: "Creative Kids Season 2 Allah's Kindness",
+      description: "A video about the creative kids season 2 Allah's kindness.",
+      video_url: "https://youtu.be/ld4mWXjERvY",
+      featured: false,
+      position: 18,
+      status: 'published'
     }
   ]
 
