@@ -1,0 +1,55 @@
+<div class="bg-white rounded-lg shadow-md p-8">
+  <%= form_with model: [:admin, @video], local: true, class: 'space-y-6' do |form| %>
+    <% if @video.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <h2 class="font-bold mb-2"><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
+        <ul class="list-disc list-inside">
+          <% @video.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :title, class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <%= form.text_field :title, class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description, class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <p class="text-xs text-gray-500 mb-2">Optional description of the video content</p>
+      <%= form.text_area :description, rows: 5, class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent', placeholder: 'A brief description of the video...' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :video_url, 'Video URL', class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <p class="text-xs text-gray-500 mb-2">YouTube URL (e.g., https://youtu.be/VIDEO_ID or https://youtube.com/watch?v=VIDEO_ID)</p>
+      <%= form.url_field :video_url, class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent', placeholder: 'https://youtu.be/VIDEO_ID' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :status, class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <%= form.select :status, options_for_select(Video.statuses.keys.map { |status| [status.humanize, status] }, @video.status),
+                      {}, class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent' %>
+    </div>
+
+    <div class="field">
+      <div class="flex items-center">
+        <%= form.check_box :featured, class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded' %>
+        <%= form.label :featured, 'Featured Video', class: 'ml-2 block text-sm font-medium text-gray-700' %>
+      </div>
+      <p class="text-xs text-gray-500 mt-1 ml-6">Featured videos appear prominently at the top of the videos page</p>
+    </div>
+
+    <div class="field">
+      <%= form.label :position, class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <p class="text-xs text-gray-500 mb-2">Display order (lower numbers appear first)</p>
+      <%= form.number_field :position, class: 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: 'bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-md font-medium transition-colors cursor-pointer' %>
+    </div>
+  <% end %>
+</div>

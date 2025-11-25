@@ -366,3 +366,114 @@ if Game.none? && !Rails.env.test?
 
   Rails.logger.debug { "Created #{Game.count} games" }
 end
+
+# Create sample videos
+# Skip sample data in test environment
+if Video.none? && !Rails.env.test?
+  Rails.logger.debug 'Creating sample videos...'
+
+  video_data = [
+    {
+      title: 'The Story of Prophet Adam (AS) - Animated',
+      description: 'Learn about the creation of Prophet Adam (AS), the first human and prophet. This animated story teaches children about the beginning of humanity and the importance of following Allah.',
+      video_url: 'https://youtu.be/WZk197Rf5LQ',
+      featured: true,
+      position: 0,
+      status: 'published'
+    },
+    {
+      title: 'Learning Wudu (Ablution) for Kids',
+      description: 'Step-by-step guide teaching children how to perform wudu properly before prayer. Perfect for beginners with clear instructions and demonstrations.',
+      video_url: 'https://youtu.be/dQw4w9WgXcQ',
+      featured: false,
+      position: 1,
+      status: 'published'
+    },
+    {
+      title: 'The Five Pillars of Islam Explained',
+      description: 'An engaging video that explains the Five Pillars of Islam in a way that children can easily understand. Includes beautiful animations and simple explanations.',
+      video_url: 'https://youtu.be/3JZ_D3ELwOQ',
+      featured: false,
+      position: 2,
+      status: 'published'
+    },
+    {
+      title: 'Prophet Muhammad (PBUH) - The Last Messenger',
+      description: 'Discover the life story of Prophet Muhammad (PBUH), the last messenger of Allah. Learn about his character, teachings, and example for all humanity.',
+      video_url: 'https://youtu.be/kJQP7kiw5Fk',
+      featured: false,
+      position: 3,
+      status: 'published'
+    },
+    {
+      title: 'Beautiful Quran Recitation for Children',
+      description: 'Soothing Quran recitation of short surahs commonly memorized by children. Helps with pronunciation and memorization.',
+      video_url: 'https://youtu.be/L_jWHffIx5E',
+      featured: false,
+      position: 4,
+      status: 'published'
+    },
+    {
+      title: 'How to Pray Salah - Kids Tutorial',
+      description: 'Complete guide to performing the five daily prayers. Shows each position and recitation clearly for young learners.',
+      video_url: 'https://youtu.be/oHg5SJYRHA0',
+      featured: false,
+      position: 5,
+      status: 'published'
+    },
+    {
+      title: 'Ramadan Explained for Children',
+      description: 'What is Ramadan? Why do Muslims fast? This video answers these questions and more, helping children understand the blessed month.',
+      video_url: 'https://youtu.be/9bZkp7q19f0',
+      featured: false,
+      position: 6,
+      status: 'published'
+    },
+    {
+      title: 'The Story of Prophet Musa (AS) - Part 1',
+      description: 'The amazing story of Prophet Musa (AS) and his encounter with Pharaoh. Learn about courage, faith, and trusting in Allah.',
+      video_url: 'https://youtu.be/2Vv-BfVoq4g',
+      featured: false,
+      position: 7,
+      status: 'published'
+    },
+    {
+      title: 'Islamic Manners and Etiquette for Kids',
+      description: 'Teaching children the beautiful manners taught by Islam including kindness, respect, honesty, and good character.',
+      video_url: 'https://youtu.be/pAyKJAtDNCw',
+      featured: false,
+      position: 8,
+      status: 'published'
+    },
+    {
+      title: 'The Angels in Islam - Who are They?',
+      description: 'Introduction to the angels in Islam, their roles, and why belief in angels is an important part of our faith.',
+      video_url: 'https://youtu.be/fJ9rUzIMcZQ',
+      featured: false,
+      position: 9,
+      status: 'draft'
+    },
+    {
+      title: 'Stories from the Quran - Prophet Sulaiman and the Ants',
+      description: 'The fascinating story of Prophet Sulaiman (AS) and how he understood the language of animals. A lesson in humility and respect for all creatures.',
+      video_url: 'https://youtu.be/GtL1huin9EE',
+      featured: false,
+      position: 10,
+      status: 'archived'
+    }
+  ]
+
+  video_data.each do |data|
+    video = Video.create!(
+      title: data[:title],
+      description: data[:description],
+      video_url: data[:video_url],
+      featured: data[:featured],
+      position: data[:position],
+      status: data[:status]
+    )
+    Rails.logger.debug { "  Created video: #{video.title}" }
+  end
+
+  Rails.logger.debug { "Created #{Video.count} videos" }
+end

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get '/about', to: 'pages#about'
-  get '/contact', to: 'pages#contact'
-  get '/resources', to: 'pages#resources'
+
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -18,11 +16,19 @@ Rails.application.routes.draw do
   resources :stories, only: %i[index show]
   resources :printables, only: %i[index show]
   resources :games, only: [:index]
+  resources :videos, only: [:index]
+
+  # Static pages contribute, about, contact, more games
+  get '/contribute', to: 'static#contribute'
+  get '/about', to: 'static#about'
+  get '/contact', to: 'static#contact'
+  get '/more-games', to: 'static#more_games', as: :more_games
 
   namespace :admin do
     resources :stories
     resources :printables
     resources :games
+    resources :videos
     resources :beads, only: [:index, :show]
   end
 end

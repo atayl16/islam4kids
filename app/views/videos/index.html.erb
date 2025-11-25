@@ -1,0 +1,138 @@
+<div class="max-w-7xl mx-auto">
+  <!-- Header Section -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-slate-800 mb-2 flex items-center">
+      <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 rounded-lg flex items-center justify-center mr-3">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        </svg>
+      </div>
+      Educational Videos
+    </h1>
+    <p class="text-slate-600 ml-13">Learn about Islam through engaging video content</p>
+  </div>
+
+  <% if @featured_video %>
+    <!-- Featured Video Section -->
+    <div class="mb-16">
+      <div class="relative bg-white rounded-2xl shadow-2xl overflow-hidden border-4 border-yellow-400">
+        <!-- Featured Badge -->
+        <div class="absolute top-4 left-4 z-10">
+          <span class="inline-flex items-center px-4 py-2 bg-yellow-400 text-yellow-900 font-bold rounded-full shadow-lg text-sm">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+            Featured Video
+          </span>
+        </div>
+
+        <!-- Video Embed -->
+        <div class="aspect-w-16 aspect-h-9 bg-slate-900">
+          <iframe
+            src="<%= @featured_video.youtube_embed_url %>"
+            title="<%= @featured_video.title %>"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            class="w-full h-full"
+            style="aspect-ratio: 16 / 9;">
+          </iframe>
+        </div>
+
+        <!-- Video Info -->
+        <div class="p-8 bg-gradient-to-r from-slate-50 to-white">
+          <h2 class="text-3xl font-bold text-slate-900 mb-3"><%= @featured_video.title %></h2>
+          <% if @featured_video.description.present? %>
+            <p class="text-slate-700 leading-relaxed"><%= @featured_video.description %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @videos.any? %>
+    <!-- More Videos Section -->
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center">
+        <svg class="w-8 h-8 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+        More Videos
+      </h2>
+    </div>
+
+    <!-- Video Cards Grid -->
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <% @videos.each do |video| %>
+        <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-red-400 transform hover:-translate-y-2">
+          <!-- Video Thumbnail with Play Button Overlay -->
+          <div class="relative cursor-pointer" onclick="this.querySelector('iframe').style.display='block'; this.querySelector('img').style.display='none'; this.querySelector('.play-overlay').style.display='none';">
+            <% if video.youtube_thumbnail_url.present? %>
+              <%= image_tag video.youtube_thumbnail_url,
+                            class: 'w-full h-48 object-cover',
+                            alt: video.title,
+                            loading: 'lazy',
+                            onerror: "this.src='data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 225\"%3E%3Crect fill=\"%23f1f5f9\" width=\"400\" height=\"225\"/%3E%3Ctext x=\"50%25\" y=\"50%25\" text-anchor=\"middle\" dy=\".3em\" fill=\"%2394a3b8\" font-size=\"18\" font-family=\"sans-serif\"%3EVideo Thumbnail%3C/text%3E%3C/svg%3E'" %>
+            <% else %>
+              <div class="w-full h-48 bg-gradient-to-r from-red-500 to-red-600"></div>
+            <% end %>
+
+            <!-- Play Button Overlay -->
+            <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-all">
+              <div class="w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform">
+                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Hidden iframe for lazy loading -->
+            <iframe
+              src=""
+              data-src="<%= video.youtube_embed_url %>"
+              title="<%= video.title %>"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              class="w-full h-48"
+              style="display:none; aspect-ratio: 16 / 9;">
+            </iframe>
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-red-600 transition-colors leading-tight">
+              <%= video.title %>
+            </h3>
+
+            <% if video.description.present? %>
+              <p class="text-slate-600 text-sm line-clamp-2 leading-relaxed">
+                <%= truncate(video.description, length: 100, separator: ' ') %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% elsif !@featured_video %>
+    <!-- No Videos Message -->
+    <div class="text-center py-16">
+      <svg class="w-24 h-24 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+      </svg>
+      <p class="text-xl text-slate-600">No videos available yet. Check back soon!</p>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  // Optimize iframe loading - only load iframe src when play button is clicked
+  document.querySelectorAll('.group iframe[data-src]').forEach(iframe => {
+    iframe.previousElementSibling.addEventListener('click', function() {
+      if (!iframe.src || iframe.src === '') {
+        iframe.src = iframe.dataset.src;
+      }
+    });
+  });
+</script>

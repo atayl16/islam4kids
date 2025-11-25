@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Pages', type: :request do
+RSpec.describe 'Static', type: :request do
   describe 'GET /about' do
     it 'returns http success' do
       get '/about'
@@ -15,9 +15,9 @@ RSpec.describe 'Pages', type: :request do
     end
   end
 
-  describe 'GET /resources' do
+  describe 'GET /contribute' do
     it 'returns http success' do
-      get '/resources'
+      get '/contribute'
       expect(response).to have_http_status(:success)
     end
   end
