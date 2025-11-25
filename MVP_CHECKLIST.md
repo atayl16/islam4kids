@@ -21,72 +21,68 @@
 
 ---
 
-## 🎯 MVP Remaining: 3 Focus Areas
+## 🎯 MVP Remaining: 2 Phases
 
-### 1. Pre-Deployment Polish (Optional but Valuable)
+### Phase 1: Feature Complete (Do Now - Zero AWS Costs)
 
-**Navigation & UX Improvements**
-- [ ] Update main navigation with better organization
-  - Stories, Printables, Games clearly accessible
-  - Add About, Contact, Resources links
+**New Content Types**
+- [ ] Videos content type with admin interface - `Islam4Kids-t1x`
+  - Video model with YouTube URL, title, description, featured flag
+  - Admin CRUD interface
+  - Public videos page with embeds
+  - YouTube embeds on story pages
+- [ ] Image processing setup - `Islam4Kids-ear`
+  - Install image_processing gem (libvips)
+  - Configure variants for different sizes
+  - Optimize existing images
+
+**Site Foundation**
+- [ ] Footer with PayPal donate button - `Islam4Kids-unp`
+- [ ] Contributing page with community guidelines - `Islam4Kids-i58`
+- [ ] Polish navigation - `Islam4Kids-5l2`
+  - Organize: Stories, Printables, Games, Videos (when ready)
+  - Add: About, Contact Us, Contributing
   - Improve mobile menu
-- [ ] Create FAQ page with common questions
-- [ ] Add donate/support information (if desired)
 
-**Quality Checks**
-- [ ] Accessibility audit (color contrast, keyboard nav, ARIA labels)
-- [ ] Mobile responsiveness verification across devices
-- [ ] Final manual testing of all user flows
+**Quality Assurance**
+- [ ] Accessibility audit - `Islam4Kids-d6p`
+  - Color contrast ratios
+  - Keyboard navigation
+  - ARIA labels for modals/dropdowns
+- [ ] Mobile responsiveness - `Islam4Kids-bln`
+  - Test on actual devices
+  - Verify card grids, modals, navigation
+- [ ] Final manual testing of all features
 
-**Track in beads**: `bd create "Polish navigation UX" -t chore -p 2 -l mvp,polish`
-
----
-
-### 2. Deployment Infrastructure (Required)
-
-**Local Environment**
-- [x] PostgreSQL configured locally
-- [x] Redis configured locally
-- [ ] Verify all tests pass with PostgreSQL
-- [ ] Document any environment-specific setup
-
-**Production Setup**
-Choose deployment platform first, then:
-
-**Option A: AWS (via Kamal - per ADR-002)**
-- [ ] Set up AWS account and credentials
-- [ ] Configure S3 bucket for Active Storage
-- [ ] Set up EC2 or ECS for app hosting
-- [ ] Configure RDS for PostgreSQL
-- [ ] Configure ElastiCache for Redis
-- [ ] Deploy via Kamal
-
-**Option B: Heroku (Simpler, costs ~$20/month)**
-- [ ] Create Heroku app
-- [ ] Add PostgreSQL addon
-- [ ] Add Redis addon
-- [ ] Configure S3 for file storage
-- [ ] Set environment variables
-- [ ] Deploy via `git push heroku main`
-
-**Track in beads**: `bd create "Set up AWS/Heroku infrastructure" -t epic -p 0 -l mvp,deployment`
+**View your work**: `bd ready -l mvp`
 
 ---
 
-### 3. Production Content (Required)
+### Phase 2: AWS Deployment (Do Last - Costs Start Here) 💰
 
-**Content Strategy**
-- [ ] Plan initial production content (how many stories/printables/games?)
-- [ ] Source or create initial content
-- [ ] Upload production-ready images
-- [ ] Test content looks good on production
+⚠️ **IMPORTANT**: AWS charges begin immediately when you provision resources, even if idle. Complete Phase 1 first to minimize costs.
 
-**Production Seeds**
-- [ ] Create production seed file (or use admin interface)
-- [ ] Ensure sample admin user is secure
-- [ ] Verify all content displays correctly
+**When Phase 1 is complete**: `Islam4Kids-qpg`
 
-**Track in beads**: `bd create "Prepare production content" -t task -p 1 -l mvp,content`
+**Infrastructure Setup**
+- [ ] AWS account and IAM configuration
+- [ ] S3 bucket for Active Storage
+- [ ] RDS PostgreSQL database
+- [ ] ElastiCache Redis instance
+- [ ] EC2/ECS for application hosting
+- [ ] Deploy via Kamal (per ADR-002)
+
+**Production Readiness**
+- [ ] Environment variables configured
+- [ ] Production seeds/content uploaded
+- [ ] SSL/TLS certificates
+- [ ] Domain configuration (islam4kids.org)
+- [ ] Monitoring and logging setup
+
+**Post-Deployment**
+- [ ] Verify all features work in production
+- [ ] Load testing
+- [ ] Backup strategy
 
 ---
 
@@ -129,25 +125,38 @@ bin/dev
 
 ## 🎯 Recommended Next Steps
 
-### This Week
-1. **Decision Point**: Choose AWS or Heroku for deployment
-2. **Create beads**: Break deployment work into trackable tasks
-3. **Polish pass**: Navigation, accessibility, mobile testing
+### This Week (Feature Work - No AWS Costs)
+1. **Start with Videos**: Work on `Islam4Kids-t1x`
+   - Generate Video model
+   - Build admin interface
+   - Create public videos page
+2. **Or Image Processing**: Work on `Islam4Kids-ear`
+   - Install image_processing gem
+   - Set up variants
+3. **Check progress**: `bd list -l mvp -s open`
 
-### Next Week
-1. **Infrastructure**: Set up chosen platform
-2. **Content**: Prepare production stories/printables/games
-3. **Deploy**: First production deployment
-4. **Test**: Verify everything works in production
+### Next 2-3 Weeks
+1. Complete all Phase 1 features
+2. Add footer with donate button
+3. Polish navigation and create Contributing page
+4. Accessibility & mobile testing
+
+### When Phase 1 Complete
+1. **Then and only then**: Start AWS setup (Phase 2)
+2. Costs begin when you provision first AWS resource
+3. Deploy and test in production
 
 ---
 
 ## 📊 Progress Tracking
 
-**Completed**: 84 tasks (Phases 1A-1F)
-**Remaining for MVP**: ~15-20 tasks (depending on deployment choice)
-**Post-MVP backlog**: 40+ enhancement tasks (tracked in ROADMAP.md)
+**Completed**: 84 tasks (Phases 1A-1F complete)
+**Phase 1 Remaining**: 7 beads (Videos, Images, Footer, Contributing, Navigation, A11y, Mobile)
+**Phase 2 Remaining**: AWS deployment (when Phase 1 complete)
+**Post-MVP backlog**: See [ROADMAP.md](ROADMAP.md:1)
 
 **Use beads for execution, this file for planning context.**
 
-Last updated: 2025-11-25 (after Blog removal)
+**View your current work**: `bd ready -l mvp`
+
+Last updated: 2025-11-25 (Updated with actual MVP scope, AWS delayed)
