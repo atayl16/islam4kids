@@ -1,27 +1,53 @@
 PreCommit:
+  # Step 1: Auto-fix what we can
   RuboCop:
     enabled: true
     required_executable: 'rubocop'
-    command: ['bundle', 'exec', 'rubocop', '--autocorrect-all', '--fail-level', 'error']
-    on_warn: pass  # Don't fail on warnings, only errors
+    command: ['bundle', 'exec', 'rubocop', '--autocorrect-all']
+    on_warn: pass
+    on_fail: pass  # Don't fail here - we'll check again below
     exclude:
       - 'config/**/*'
       - 'db/schema.rb'
       - 'db/migrate/**/*'
-  
-  RSpec:
-    enabled: false
-    description: 'Run RSpec tests'
-    command: ['bundle', 'exec', 'rspec']
 
-PrePush:
+  # Step 2: Run strict check (matches CI exactly)
+  RuboCopStrict:
+    enabled: true
+    required_executable: 'rubocop'
+    command: ['bin/rubocop']  # Matches CI: bin/rubocop -f github (format doesn't affect pass/fail)
+    on_warn: fail  # Fail on warnings to match CI strictness
+    exclude:
+      - 'config/**/*'
+      - 'db/schema.rb'
+      - 'db/migrate/**/*'
+
+  # Step 3: Run full test suite (matches CI)
+  RSpec:
+    enabled: true
+    description: 'Run RSpec tests (matches CI)'
+    command: ['bundle', 'exec', 'rspec', '--format', 'progress']
+
+  # Step 4: Security scan (moved from pre-push to catch issues earlier)
   Brakeman:
     enabled: true
     required_executable: 'brakeman'
-    command: ['bundle', 'exec', 'brakeman', '-q']
-  
+    command: ['bin/brakeman', '--no-pager']  # Matches CI exactly
+
+  # Step 5: JS dependency audit (matches CI)
+  ImportmapAudit:
+    enabled: true
+    required_executable: 'rails'
+    command: ['bin/importmap', 'audit']
+
+PrePush:
+  # All CI checks now run in PreCommit, so PrePush is just a final safety net
+  # These are quick checks that catch issues if someone bypasses pre-commit
+
   BundleAudit:
     enabled: true
     required_executable: 'bundler-audit'
     command: ['bin/bundler-audit-hook']
+
+  # Brakeman moved to PreCommit to catch security issues earlier
 
