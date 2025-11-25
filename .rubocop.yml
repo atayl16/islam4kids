@@ -69,37 +69,3 @@ Naming/PredicatePrefix:
 # Don't enforce Rails 8 params.expect syntax (we prefer the traditional require/permit pattern)
 Rails/StrongParametersExpect:
   Enabled: false
-
-# Temporary exclusions for pre-existing violations
-# TODO: Fix these issues (tracked in Islam4Kids-a0t)
-# Remove these exclusions after refactoring BeadsService, BeadsController, ApplicationHelper
-
-Metrics/ClassLength:
-  Exclude:
-    - 'app/services/beads_service.rb'
-
-Metrics/AbcSize:
-  Exclude:
-    - 'app/services/beads_service.rb'
-    - 'app/controllers/admin/beads_controller.rb'
-
-Metrics/MethodLength:
-  Exclude:
-    - 'app/services/beads_service.rb'
-    - 'app/controllers/admin/beads_controller.rb'
-
-Metrics/CyclomaticComplexity:
-  Exclude:
-    - 'app/services/beads_service.rb'
-
-Metrics/PerceivedComplexity:
-  Exclude:
-    - 'app/services/beads_service.rb'
-
-Style/MultilineBlockChain:
-  Exclude:
-    - 'app/services/beads_service.rb'
-
-Lint/DuplicateBranch:
-  Exclude:
-    - 'app/helpers/application_helper.rb'

@@ -1,6 +1,17 @@
 # Service for interacting with Beads issue tracker via CLI
+# rubocop:disable Metrics/ClassLength
+# Justification: Service integrates multiple Beads CLI commands with fallback logic for resilience
 class BeadsService
   require 'open3'
+
+  STAT_MAPPINGS = {
+    'Total Issues' => :total,
+    'Open' => :open,
+    'In Progress' => :in_progress,
+    'Closed' => :closed,
+    'Blocked' => :blocked,
+    'Ready' => :ready
+  }.freeze
 
   class << self
     # Get all issues
@@ -18,14 +29,7 @@ class BeadsService
       JSON.parse(result)
     rescue StandardError => e
       Rails.logger.error("Beads ready CLI error: #{e.message}, calculating from issues")
-      issues = read_issues_from_file
-      # Ready issues are those that are open and have no dependencies blocking them
-      all_blocked_ids = issues.flat_map do |i|
-        i['dependencies']&.select do |d|
-          d['type'] == 'blocks'
-        end&.map { |d| d['depends_on_id'] } || []
-      end.uniq
-      issues.select { |i| i['status'] == 'open' && all_blocked_ids.exclude?(i['id']) }
+      calculate_ready_issues
     end
 
     # Get project statistics
@@ -68,6 +72,8 @@ class BeadsService
     end
 
     # Filter issues by various criteria
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # Justification: Filter logic requires checking multiple optional parameters
     def filter_issues(status: nil, priority: nil, label: nil)
       issues = all_issues
 
@@ -77,6 +83,7 @@ class BeadsService
 
       issues
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     # Group issues by priority
     def issues_by_priority
@@ -106,25 +113,23 @@ class BeadsService
     end
 
     def parse_stats(output)
-      stats = {
-        total: 0,
-        open: 0,
-        in_progress: 0,
-        closed: 0,
-        blocked: 0,
-        ready: 0
-      }
+      stats = default_stats
 
       output.each_line do |line|
-        stats[:total] = line.match(/Total Issues:\s+(\d+)/)[1].to_i if line.include?('Total Issues:')
-        stats[:open] = line.match(/Open:\s+(\d+)/)[1].to_i if line.include?('Open:')
-        stats[:in_progress] = line.match(/In Progress:\s+(\d+)/)[1].to_i if line.include?('In Progress:')
-        stats[:closed] = line.match(/Closed:\s+(\d+)/)[1].to_i if line.include?('Closed:')
-        stats[:blocked] = line.match(/Blocked:\s+(\d+)/)[1].to_i if line.include?('Blocked:')
-        stats[:ready] = line.match(/Ready:\s+(\d+)/)[1].to_i if line.include?('Ready:')
+        parse_stat_line(line, stats)
       end
 
       stats
+    end
+
+    def parse_stat_line(line, stats)
+      STAT_MAPPINGS.each do |label, key|
+        stats[key] = extract_stat_value(line, label) if line.include?("#{label}:")
+      end
+    end
+
+    def extract_stat_value(line, label)
+      line.match(/#{Regexp.escape(label)}:\s+(\d+)/)[1].to_i
     end
 
     def default_stats
@@ -142,25 +147,38 @@ class BeadsService
       issues_file = Rails.root.join('.beads/issues.jsonl')
       return [] unless File.exist?(issues_file)
 
-      File.readlines(issues_file).map do |line|
-        JSON.parse(line.strip)
-      rescue JSON::ParserError => e
-        Rails.logger.error("Error parsing JSONL line: #{e.message}")
-        nil
-      end.compact
+      File.readlines(issues_file).filter_map { |line| parse_issue_line(line) }
     rescue StandardError => e
       Rails.logger.error("Error reading issues file: #{e.message}")
       []
     end
 
+    def parse_issue_line(line)
+      JSON.parse(line.strip)
+    rescue JSON::ParserError => e
+      Rails.logger.error("Error parsing JSONL line: #{e.message}")
+      nil
+    end
+
     def calculate_stats_from_issues
       issues = read_issues_from_file
-      all_blocked_ids = issues.flat_map do |i|
-        i['dependencies']&.select do |d|
-          d['type'] == 'blocks'
-        end&.map { |d| d['depends_on_id'] } || []
-      end.uniq
+      all_blocked_ids = extract_blocked_ids(issues)
 
+      build_stats_hash(issues, all_blocked_ids)
+    end
+
+    def extract_blocked_ids(issues)
+      issues.flat_map { |i| extract_blocking_dependencies(i) }.uniq
+    end
+
+    def extract_blocking_dependencies(issue)
+      blocking_deps = issue['dependencies']&.select { |d| d['type'] == 'blocks' }
+      blocking_deps&.pluck('depends_on_id') || []
+    end
+
+    # rubocop:disable Metrics/AbcSize
+    # Justification: Stats hash requires counting 6 different issue states
+    def build_stats_hash(issues, all_blocked_ids)
       {
         total: issues.count,
         open: issues.count { |i| i['status'] == 'open' },
@@ -170,5 +188,13 @@ class BeadsService
         ready: issues.count { |i| i['status'] == 'open' && all_blocked_ids.exclude?(i['id']) }
       }
     end
+    # rubocop:enable Metrics/AbcSize
+
+    def calculate_ready_issues
+      issues = read_issues_from_file
+      all_blocked_ids = extract_blocked_ids(issues)
+      issues.select { |i| i['status'] == 'open' && all_blocked_ids.exclude?(i['id']) }
+    end
   end
 end
+# rubocop:enable Metrics/ClassLength

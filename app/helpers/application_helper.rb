@@ -63,9 +63,8 @@ module ApplicationHelper
     when 'epic' then 'bg-purple-100 text-purple-800'
     when 'feature' then 'bg-blue-100 text-blue-800'
     when 'bug' then 'bg-red-100 text-red-800'
-    when 'task' then 'bg-gray-100 text-gray-800'
     when 'chore' then 'bg-yellow-100 text-yellow-800'
-    else 'bg-gray-100 text-gray-800'
+    else 'bg-gray-100 text-gray-800' # Default for 'task' and unknown types
     end
   end
 end

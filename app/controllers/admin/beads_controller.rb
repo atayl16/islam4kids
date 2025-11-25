@@ -3,16 +3,10 @@ module Admin
   class BeadsController < BaseController
     def index
       @stats = BeadsService.stats
-      @issues = fetch_filtered_issues || []
+      @issues = fetch_filtered_issues
       @issues_by_priority = group_issues(@issues)
-      @has_filters = params[:status].present? || params[:priority].present? || params[:label].present?
-
-      # Get unique labels for filter dropdown
-      all_issues = BeadsService.all_issues
-      @all_labels = all_issues.flat_map { |i| i['labels'] || [] }.uniq.sort
-
-      # Get unique statuses
-      @all_statuses = all_issues.pluck('status').uniq.sort
+      @has_filters = filters_present?
+      setup_filter_options
     end
 
     def show
@@ -30,24 +24,41 @@ module Admin
 
     private
 
+    # rubocop:disable Metrics/MethodLength
+    # Justification: Method includes necessary error handling and logging
     def fetch_filtered_issues
-      status = params[:status].presence
-      priority = params[:priority].presence
-      label = params[:label].presence
-
-      if status || priority || label
+      if filters_present?
         BeadsService.filter_issues(
-          status: status,
-          priority: priority,
-          label: label
+          status: params[:status].presence,
+          priority: params[:priority].presence,
+          label: params[:label].presence
         )
       else
         BeadsService.all_issues
       end
     rescue StandardError => e
-      Rails.logger.error("Error fetching filtered issues: #{e.message}")
-      Rails.logger.error(e.backtrace.join("\n"))
+      log_fetch_error(e)
       []
+    end
+    # rubocop:enable Metrics/MethodLength
+
+    def filters_present?
+      params[:status].present? || params[:priority].present? || params[:label].present?
+    end
+
+    def setup_filter_options
+      all_issues = BeadsService.all_issues
+      @all_labels = extract_unique_labels(all_issues)
+      @all_statuses = all_issues.pluck('status').uniq.sort
+    end
+
+    def extract_unique_labels(issues)
+      issues.flat_map { |i| i['labels'] || [] }.uniq.sort
+    end
+
+    def log_fetch_error(error)
+      Rails.logger.error("Error fetching filtered issues: #{error.message}")
+      Rails.logger.error(error.backtrace.join("\n"))
     end
 
     def group_issues(issues)
