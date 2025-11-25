@@ -144,7 +144,7 @@ bin/docker db:rollback
 bin/docker rspec
 
 # Run specific test file
-bin/docker rspec spec/models/blog_spec.rb
+bin/docker rspec spec/models/story_spec.rb
 
 # Open a shell in the container
 bin/docker shell
@@ -174,7 +174,7 @@ docker-compose exec web bin/rails db:migrate
 docker-compose exec web bundle exec rspec
 
 # Run specific test
-docker-compose exec web bundle exec rspec spec/models/blog_spec.rb
+docker-compose exec web bundle exec rspec spec/models/story_spec.rb
 
 # Open shell
 docker-compose exec web bash
@@ -209,8 +209,8 @@ docker-compose exec web bundle exec rspec
 ### Specific Test Files
 
 ```bash
-bin/docker rspec spec/models/blog_spec.rb
-bin/docker rspec spec/controllers/admin/blogs_controller_spec.rb
+bin/docker rspec spec/models/story_spec.rb
+bin/docker rspec spec/controllers/admin/stories_controller_spec.rb
 ```
 
 ### With Coverage Report
@@ -311,7 +311,7 @@ Common PostgreSQL commands:
 
 ```sql
 \dt              -- List tables
-\d blogs         -- Describe blogs table
+\d stories       -- Describe stories table
 \q               -- Quit
 ```
 
@@ -551,7 +551,7 @@ Add `debugger` or `byebug` to your code:
 ```ruby
 def index
   debugger  # Execution will pause here
-  @blogs = Blog.all
+  @stories = Story.all
 end
 ```
 

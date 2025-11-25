@@ -9,7 +9,6 @@ A Rails 8 content management platform for Islamic educational content serving ch
 
 Islam4Kids provides educational Islamic content for children through:
 - **Stories**: Islamic stories with engaging header images
-- **Blogs**: Articles and educational posts
 - **Printables**: Downloadable worksheets, activities, and resources (9 types)
 - **Games**: Educational games from trusted external sources
 
@@ -108,7 +107,7 @@ See [docs/setup.md](docs/setup.md) for full development workflow.
 bin/docker rspec
 
 # Run specific test
-bin/docker rspec spec/models/blog_spec.rb
+bin/docker rspec spec/models/story_spec.rb
 
 # View coverage report
 open coverage/index.html

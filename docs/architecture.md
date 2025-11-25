@@ -7,7 +7,7 @@ Islam4Kids is a Rails 8 content management platform for Islamic educational cont
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                      Public Site                             │
-│  (Blogs, Stories, Printables, Games - read-only, cached)    │
+│  (Stories, Printables, Games - read-only, cached)            │
 └─────────────────────────────────────────────────────────────┘
                            │
                            │ Rails Router
@@ -39,7 +39,6 @@ All models extend `ApplicationRecord` and use PostgreSQL.
 
 | Model | Purpose | Key Fields | Attachments |
 |-------|---------|------------|-------------|
-| **Blog** | Blog posts and articles | title, content, status | header_image |
 | **Story** | Islamic stories for children | title, content, summary, status | header_image |
 | **Printable** | Downloadable worksheets/activities | title, description, printable_type, status | pdf_file, image_file, thumbnail_image |
 | **Game** | Educational games (external links) | title, description, game_url, status | thumbnail_image |
@@ -50,7 +49,7 @@ All models extend `ApplicationRecord` and use PostgreSQL.
 All content models include the `Publishable` concern and have no explicit associations (simple flat structure).
 
 ```ruby
-Blog/Story/Printable/Game
+Story/Printable/Game
   ├─ include Publishable
   └─ has_one_attached :header_image (or thumbnail_image, pdf_file, etc.)
 
@@ -82,7 +81,7 @@ after_commit :clear_cache
 - Automatic cache invalidation when content changes
 - Shared query methods: `.draft`, `.published`, `.archived`
 
-**Used by**: Blog, Story, Printable, Game
+**Used by**: Story, Printable, Game
 
 **Why**: Ensures consistent state management across all content types and keeps cached content fresh.
 
@@ -152,25 +151,25 @@ end
 ```
 Admin creates content (draft)
     ↓
-Blog.create!(status: 'draft', header_image: file)
+Story.create!(status: 'draft', header_image: file)
     ↓
 Content saved to PostgreSQL
 Image saved to Active Storage
     ↓
 Admin publishes content
     ↓
-Blog.update!(status: 'published')
+Story.update!(status: 'published')
     ↓
 Publishable#clear_cache callback
     ↓
-Rails.cache.delete('blogs/published-collection')
-Rails.cache.delete("blogs/#{id}")
+Rails.cache.delete('stories/published-collection')
+Rails.cache.delete("stories/#{id}")
     ↓
-Public visitor requests /blogs
+Public visitor requests /stories
     ↓
-BlogsController#index checks cache
+StoriesController#index checks cache
     ↓
-Cache miss → Blog.published.order(created_at: :desc)
+Cache miss → Story.published.order(created_at: :desc)
 Cache hit → Return cached collection
     ↓
 Render view with 12-hour cache expiry
@@ -195,7 +194,6 @@ Render view with 12-hour cache expiry
 
 **Controllers**:
 - `HomeController` - Landing page with featured content
-- `BlogsController` - Blog listing and detail pages
 - `StoriesController` - Story listing and detail pages
 - `PrintablesController` - Printable listing and detail pages
 - `GamesController` - Game listing page
@@ -224,7 +222,6 @@ before_action :check_admin         # is_admin? check
 ```
 
 **Controllers**:
-- `Admin::BlogsController` - Blog CRUD
 - `Admin::StoriesController` - Story CRUD
 - `Admin::PrintablesController` - Printable CRUD with attachment management
 - `Admin::GamesController` - Game CRUD
@@ -242,14 +239,12 @@ before_action :check_admin         # is_admin? check
 
 ```ruby
 # Public routes (read-only)
-resources :blogs, only: [:index, :show]
 resources :stories, only: [:index, :show]
 resources :printables, only: [:index, :show]
 resources :games, only: [:index]
 
 # Admin routes (full CRUD)
 namespace :admin do
-  resources :blogs
   resources :stories
   resources :printables
   resources :games
@@ -376,7 +371,7 @@ spec/
 
 **Model specs**: Validate required fields, enums, business logic
 ```ruby
-RSpec.describe Blog do
+RSpec.describe Story do
   it { should validate_presence_of(:title) }
   it { should define_enum_for(:status) }
 end
@@ -395,9 +390,9 @@ end
 
 **Request specs**: Test full HTTP request/response cycle
 ```ruby
-it 'returns published blogs in descending order' do
-  get blogs_path
-  expect(assigns(:blogs)).to eq([blog2, blog1])
+it 'returns published stories in descending order' do
+  get stories_path
+  expect(assigns(:stories)).to eq([story2, story1])
 end
 ```
 

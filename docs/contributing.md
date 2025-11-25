@@ -231,7 +231,7 @@ ALLOWED_CONTENT_TYPES = ['image/png', 'image/jpg'].freeze
 
 ```ruby
 # Good order for model contents:
-class Blog < ApplicationRecord
+class Story < ApplicationRecord
   # 1. Includes and extends
   include Publishable
 
@@ -312,7 +312,7 @@ See [.claude/skills/rails-guidelines/SKILL.md](../.claude/skills/rails-guideline
 **Example model spec**:
 
 ```ruby
-RSpec.describe Blog do
+RSpec.describe Story do
   describe 'validations' do
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:content) }
@@ -325,8 +325,8 @@ RSpec.describe Blog do
 
   describe '#summary' do
     it 'returns truncated content' do
-      blog = create(:blog, content: 'A' * 300)
-      expect(blog.summary.length).to be <= 200
+      story = create(:story, content: 'A' * 300)
+      expect(story.summary.length).to be <= 200
     end
   end
 end
@@ -347,10 +347,10 @@ end
 bin/docker rspec
 
 # Specific file
-bin/docker rspec spec/models/blog_spec.rb
+bin/docker rspec spec/models/story_spec.rb
 
 # Specific test
-bin/docker rspec spec/models/blog_spec.rb:15
+bin/docker rspec spec/models/story_spec.rb:15
 
 # By tag
 bin/docker rspec --tag focus

@@ -16,7 +16,7 @@ This document outlines planned AI features for Islam4Kids using the Anthropic Cl
 
 **Purpose**: Generate SEO-optimized titles and meta descriptions for content
 
-**Use case**: When creating/editing blogs, stories, or printables, generate 3 options for page title and meta description based on content.
+**Use case**: When creating/editing stories or printables, generate 3 options for page title and meta description based on content.
 
 **Benefit**:
 - Saves time on SEO optimization
@@ -139,11 +139,11 @@ Store AI-generated suggestions in JSONB columns for flexibility:
 
 ```ruby
 # Migration example for SEO metadata
-add_column :blogs, :ai_suggested_titles, :jsonb
-add_column :blogs, :ai_suggested_descriptions, :jsonb
-add_column :blogs, :ai_generated_at, :datetime
-add_column :blogs, :selected_title_index, :integer
-add_column :blogs, :selected_description_index, :integer
+add_column :stories, :ai_suggested_titles, :jsonb
+add_column :stories, :ai_suggested_descriptions, :jsonb
+add_column :stories, :ai_generated_at, :datetime
+add_column :stories, :selected_title_index, :integer
+add_column :stories, :selected_description_index, :integer
 ```
 
 **Why JSONB**:
@@ -212,7 +212,7 @@ DO NOT make claims about Islamic rulings - suggest review by qualified person.
 **Tasks**:
 - [ ] Build `AI::MetadataGenerator` service
 - [ ] Design and test prompts for quality output
-- [ ] Add JSONB columns to Blog, Story, Printable models
+- [ ] Add JSONB columns to Story, Printable models
 - [ ] Create controller action `generate_seo_metadata`
 - [ ] Build admin UI with "Generate SEO" button
 - [ ] Display AI suggestions with selection interface
@@ -271,24 +271,24 @@ add_index :ai_usages, :feature_type
 add_index :ai_usages, :created_at
 ```
 
-### Content Models (Example for Blog)
+### Content Models (Example for Story)
 
 ```ruby
-# Add to existing blogs table
-add_column :blogs, :ai_suggested_titles, :jsonb
-add_column :blogs, :ai_suggested_descriptions, :jsonb
-add_column :blogs, :ai_suggested_keywords, :jsonb
-add_column :blogs, :ai_generated_at, :datetime
-add_column :blogs, :ai_reviewed, :boolean, default: false
+# Add to existing stories table
+add_column :stories, :ai_suggested_titles, :jsonb
+add_column :stories, :ai_suggested_descriptions, :jsonb
+add_column :stories, :ai_suggested_keywords, :jsonb
+add_column :stories, :ai_generated_at, :datetime
+add_column :stories, :ai_reviewed, :boolean, default: false
 
-# Same pattern for stories, printables
+# Same pattern for printables
 ```
 
 ## Admin Interface
 
 ### SEO Metadata Generator UI
 
-**Location**: Blog/Story/Printable edit page
+**Location**: Story/Printable edit page
 
 **Button**: "Generate SEO Suggestions" (disabled if content hasn't changed)
 
@@ -332,7 +332,7 @@ Suggested Alt Text:
 
 ### Content Review UI
 
-**Location**: Blog/Story edit page
+**Location**: Story edit page
 
 **Button**: "Review Content" (runs grammar/clarity check)
 
@@ -414,8 +414,8 @@ end
 # spec/services/ai/metadata_generator_spec.rb
 RSpec.describe AI::MetadataGenerator do
   describe '#generate', :vcr do
-    let(:blog) { create(:blog, title: 'Learning About Salah', body: sample_content) }
-    let(:generator) { described_class.new(blog) }
+    let(:story) { create(:story, title: 'Learning About Salah', body: sample_content) }
+    let(:generator) { described_class.new(story) }
 
     it 'generates SEO metadata with correct structure' do
       result = generator.generate
@@ -510,7 +510,7 @@ end
 | Grammar Check | ~2000 | ~500 | ~$0.014 |
 | Content Draft | ~1000 | ~3000 | ~$0.048 |
 
-**Monthly estimate** (assuming 20 blog posts, 10 stories, 30 images):
+**Monthly estimate** (assuming 30 stories, 30 images):
 - SEO: 30 uses × $0.004 = $0.12
 - Alt text: 30 uses × $0.004 = $0.12
 - Grammar: 30 uses × $0.014 = $0.42

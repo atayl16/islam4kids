@@ -23,41 +23,6 @@ unless Rails.env.test?
   end
 end
 
-# Create sample blogs with Faker
-# Skip sample data in test environment to avoid polluting test database
-if Blog.none? && !Rails.env.test?
-  Rails.logger.debug 'Creating sample blogs...'
-
-  # Create published blogs
-  10.times do
-    Blog.create!(
-      title: Faker::Book.title,
-      content: Faker::Lorem.paragraph(sentence_count: 10),
-      status: 'published',
-      created_at: Faker::Time.between(from: 30.days.ago, to: Time.current)
-    )
-  end
-
-  # Create draft blogs
-  3.times do
-    Blog.create!(
-      title: Faker::Book.title,
-      content: Faker::Lorem.paragraph(sentence_count: 8),
-      status: 'draft'
-    )
-  end
-
-  # Create archived blogs
-  2.times do
-    Blog.create!(
-      title: Faker::Book.title,
-      content: Faker::Lorem.paragraph(sentence_count: 8),
-      status: 'archived',
-      created_at: Faker::Time.between(from: 60.days.ago, to: 30.days.ago)
-    )
-  end
-end
-
 # Create sample stories with realistic Islamic content
 # Skip sample data in test environment
 if Story.none? && !Rails.env.test?
